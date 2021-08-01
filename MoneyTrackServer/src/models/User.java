@@ -18,10 +18,9 @@ public class User implements Serializable {
      * @param id userId
      */
 
-    public User(String email, String password, int id) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
-        this.id = id;
     }
 
     /**

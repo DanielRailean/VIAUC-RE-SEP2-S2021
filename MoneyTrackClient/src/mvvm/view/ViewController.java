@@ -1,0 +1,27 @@
+package mvvm.view;
+
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import services.ViewHandler;
+import services.ViewModelFactory;
+
+public abstract class ViewController {
+
+    private Parent root;
+    private Scene scene;
+
+    abstract public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler);
+
+    public Parent getRoot() {
+        return root;
+    }
+
+    public void setRoot(Parent root) {
+        this.root = root;
+        scene = new Scene(root);
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+}

@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="JUnit5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libraries/JUnit5/junit-jupiter-params-5.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/JUnit5/opentest4j-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/JUnit5/junit-jupiter-5.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/JUnit5/junit-jupiter-api-5.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/JUnit5/junit-platform-engine-1.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/JUnit5/junit-jupiter-engine-5.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/JUnit5/apiguardian-api-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/JUnit5/junit-platform-commons-1.4.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
