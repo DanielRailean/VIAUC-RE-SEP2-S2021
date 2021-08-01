@@ -16,5 +16,10 @@
          </font>
       </Label>
       <TextField fx:id="emailField" layoutX="211.0" layoutY="175.0" promptText="email" />
+      <Label layoutX="49.0" layoutY="317.0" onMouseClicked="#back" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

@@ -1,8 +1,10 @@
 package services;
 
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mvvm.view.ViewController;
+import mvvm.view.controllers.MainController;
 
 public class ViewHandler {
     private Stage stage = null;
@@ -11,15 +13,22 @@ public class ViewHandler {
     private ViewModelFactory viewModelFactory;
     private ViewControllerFactory viewControllerFactory;
 
+    private MainController mainController;
+
 
     public ViewHandler(ViewModelFactory viewModelFactory) {
         this.viewModelFactory = viewModelFactory;
         this.viewControllerFactory = new ViewControllerFactory();
+        mainController =  (MainController)viewControllerFactory.getViewController("Main");
     }
 
     public void start() throws Exception{
         stage = new Stage();
-        OpenView(Views.Register.name());
+        viewControllerFactory.getViewController(Views.Main.name());
+        viewControllerFactory.getViewController(Views.Start.name());
+        Object var = viewControllerFactory.getViewController(Views.Register.name());
+        OpenView(Views.Main.name());
+        setCenterView(Views.Start.name());
     }
 
     public void OpenView(String viewName) {
@@ -29,5 +38,13 @@ public class ViewHandler {
         scene= viewController.getScene();
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void setCenterView(String viewName){
+        viewController = viewControllerFactory.getViewController(viewName);
+        viewController.init(viewModelFactory,this);
+        Parent root = viewController.getRoot();
+        mainController.borderPane.setCenter(root);
+        stage.sizeToScene();
     }
 }

@@ -1,5 +1,7 @@
 package services;
 
 public enum Views {
-    Register
+    Register,
+    Main,
+    Start,
 }

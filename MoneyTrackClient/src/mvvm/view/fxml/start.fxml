@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.StartupController">
+   <children>
+      <Label layoutX="67.0" layoutY="246.0" onMouseClicked="#redirectBrowse" prefHeight="89.0" prefWidth="127.0" text="Browse without login" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="463.0" layoutY="275.0" onMouseClicked="#redirectRegister" text="SignUp" textAlignment="CENTER" textFill="#5b5b5b">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="273.0" layoutY="275.0" onMouseClicked="#redirectLogin" text="Login" textAlignment="CENTER" textFill="#5b5b5b">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="148.0" layoutY="106.0" prefHeight="39.0" prefWidth="304.0" text="Wellcome to MoneyTrack" textFill="#813db5">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

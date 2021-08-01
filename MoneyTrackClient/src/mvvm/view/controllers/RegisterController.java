@@ -8,6 +8,7 @@ import services.ViewModelFactory;
 
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import services.Views;
 
 public class RegisterController extends ViewController {
     private Register register;
@@ -38,4 +39,9 @@ public class RegisterController extends ViewController {
             System.out.println("You are registered");
         }
     }
-}
+    public void back(MouseEvent mouseEvent){
+        viewHandler.setCenterView(Views.Start.name());
+    }
+
+
+    }
