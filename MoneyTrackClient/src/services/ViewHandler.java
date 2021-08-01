@@ -4,36 +4,34 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mvvm.view.ViewController;
+import mvvm.view.Views;
 import mvvm.view.controllers.MainController;
 
 public class ViewHandler {
     private Stage stage = null;
     private Scene scene;
     private ViewController viewController = null;
-    private ViewModelFactory viewModelFactory;
-    private ViewControllerFactory viewControllerFactory;
+    private ViewModelFlyweight viewModelFlyweight;
+    private ViewControllersFlyweight viewControllersFlyweight;
 
     private MainController mainController;
 
 
-    public ViewHandler(ViewModelFactory viewModelFactory) {
-        this.viewModelFactory = viewModelFactory;
-        this.viewControllerFactory = new ViewControllerFactory();
-        mainController =  (MainController)viewControllerFactory.getViewController("Main");
+    public ViewHandler(ViewModelFlyweight viewModelFlyweight) {
+        this.viewModelFlyweight = viewModelFlyweight;
+        this.viewControllersFlyweight = new ViewControllersFlyweight();
+        mainController =  (MainController) viewControllersFlyweight.getViewController(Views.Main.name());
     }
 
     public void start() throws Exception{
         stage = new Stage();
-        viewControllerFactory.getViewController(Views.Main.name());
-        viewControllerFactory.getViewController(Views.Start.name());
-        Object var = viewControllerFactory.getViewController(Views.Register.name());
         OpenView(Views.Main.name());
         setCenterView(Views.Start.name());
     }
 
     public void OpenView(String viewName) {
-        viewController = viewControllerFactory.getViewController(viewName);
-        viewController.init(viewModelFactory,this);
+        viewController = viewControllersFlyweight.getViewController(viewName);
+        viewController.init(viewModelFlyweight,this);
         stage.setTitle(viewName);
         scene= viewController.getScene();
         stage.setScene(scene);
@@ -41,8 +39,8 @@ public class ViewHandler {
     }
 
     public void setCenterView(String viewName){
-        viewController = viewControllerFactory.getViewController(viewName);
-        viewController.init(viewModelFactory,this);
+        viewController = viewControllersFlyweight.getViewController(viewName);
+        viewController.init(viewModelFlyweight,this);
         Parent root = viewController.getRoot();
         mainController.borderPane.setCenter(root);
         stage.sizeToScene();

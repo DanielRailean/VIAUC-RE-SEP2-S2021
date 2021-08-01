@@ -9,12 +9,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-public class ViewControllerFactory {
+public class ViewControllersFlyweight {
     private static HashMap<String, ViewController> viewControllers = new HashMap<>();
 
     public ViewController getViewController(String controllerName){
         ViewController viewController;
-        synchronized (ViewControllerFactory.class){
+        synchronized (ViewControllersFlyweight.class){
             viewController = viewControllers.get(controllerName);
         }
         if(viewController == null){
@@ -42,7 +42,7 @@ public class ViewControllerFactory {
             }
             viewController = loader.getController();
             viewController.setRoot(root);
-            synchronized (ViewControllerFactory.class){
+            synchronized (ViewControllersFlyweight.class){
                 viewControllers.put(controllerName,viewController);
             }
         }
@@ -70,7 +70,7 @@ public class ViewControllerFactory {
         }
         ViewController viewController = loader.getController();
         viewController.setRoot(root);
-        synchronized (ViewControllerFactory.class){
+        synchronized (ViewControllersFlyweight.class){
             viewControllers.put(controllerName,viewController);
         }
         return viewController;

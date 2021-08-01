@@ -1,4 +1,4 @@
-package services;
+package mvvm.view;
 
 public enum Views {
     Register,

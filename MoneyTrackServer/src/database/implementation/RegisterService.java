@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class RegisterService implements IRegisterService {
     @Override
-    public boolean emailTaken(String email) {
+    public boolean emailFree(String email) {
         try (Connection connection = DBAccess.getInstance().getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM users WHERE email  = ?"))
         {
             preparedStatement.setString(1, email);
@@ -27,6 +27,9 @@ public class RegisterService implements IRegisterService {
 
     @Override
     public boolean register(User user) {
+        System.out.println(user.getEmail()+" " + user.getPassword()+" "+ emailFree(user.getEmail()));
+        if(!emailFree(user.getEmail())) return false;
+
         try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(email, password) values(?, ?)"))
         {
 

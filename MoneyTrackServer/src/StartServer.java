@@ -1,4 +1,5 @@
-import manager.implementation.RegisterManager;
+
+import database.implementation.RegisterService;
 import networking.implementation.RegisterServer;
 import networking.interfaces.IRegisterServer;
 
@@ -11,7 +12,7 @@ public class StartServer {
 
     public static void main(String[] args) throws RemoteException {
         Registry registry = LocateRegistry.createRegistry(4000);
-        IRegisterServer registerServer = new RegisterServer(new RegisterManager(), registry);
+        IRegisterServer registerServer = new RegisterServer(new RegisterService(), registry);
     }
 
 }

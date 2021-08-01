@@ -1,12 +1,12 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
-import services.ClientFactory;
-import services.ModelFactory;
+import services.ServerAccessFlyweight;
+import services.ServicesFlyweight;
 import services.ViewHandler;
-import services.ViewModelFactory;
+import services.ViewModelFlyweight;
 
 public class MoneyTrack extends Application {
-    private ClientFactory clientFactory;
+    private ServerAccessFlyweight serverAccessFlyweight;
 
     public static void main(String[] args) {
         launch(args);
@@ -15,10 +15,10 @@ public class MoneyTrack extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try{
-            clientFactory = new ClientFactory();
-            ModelFactory modelFactory = new ModelFactory(clientFactory);
-            ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
-            ViewHandler viewHandler = new ViewHandler(viewModelFactory);
+            serverAccessFlyweight = new ServerAccessFlyweight();
+            ServicesFlyweight servicesFlyweight = new ServicesFlyweight(serverAccessFlyweight);
+            ViewModelFlyweight viewModelFlyweight = new ViewModelFlyweight(servicesFlyweight);
+            ViewHandler viewHandler = new ViewHandler(viewModelFlyweight);
             viewHandler.start();
         } catch (Exception e){
             e.printStackTrace();

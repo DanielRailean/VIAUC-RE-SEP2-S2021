@@ -2,6 +2,6 @@ package mvvm.model.interfaces;
 
 import models.User;
 
-public interface IRegister {
+public interface IRegisterService {
     String register(User user);
 }

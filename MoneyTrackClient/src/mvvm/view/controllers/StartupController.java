@@ -1,18 +1,16 @@
 package mvvm.view.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import mvvm.view.ViewController;
 import services.ViewHandler;
-import services.ViewModelFactory;
-import services.Views;
+import services.ViewModelFlyweight;
+import mvvm.view.Views;
 
 public class StartupController extends ViewController {
     private ViewHandler viewHandler;
 
     @Override
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) {
+    public void init(ViewModelFlyweight viewModelFlyweight, ViewHandler viewHandler) {
         this.viewHandler = viewHandler;
     }
 

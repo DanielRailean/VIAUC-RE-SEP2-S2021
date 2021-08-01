@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import mvvm.view.ViewController;
 import services.ViewHandler;
-import services.ViewModelFactory;
+import services.ViewModelFlyweight;
 
 public class MainController extends ViewController {
 
@@ -14,7 +14,7 @@ public class MainController extends ViewController {
     public BorderPane borderPane;
 
     @Override
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) {
+    public void init(ViewModelFlyweight viewModelFlyweight, ViewHandler viewHandler) {
 
     }
 }

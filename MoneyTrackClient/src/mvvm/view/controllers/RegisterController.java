@@ -4,11 +4,11 @@ import javafx.fxml.FXML;
 import mvvm.view.ViewController;
 import mvvm.viewModel.Register;
 import services.ViewHandler;
-import services.ViewModelFactory;
+import services.ViewModelFlyweight;
 
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import services.Views;
+import mvvm.view.Views;
 
 public class RegisterController extends ViewController {
     private Register register;
@@ -24,8 +24,8 @@ public class RegisterController extends ViewController {
     private TextField emailField;
 
     @Override
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) {
-        this.register = viewModelFactory.getRegister();
+    public void init(ViewModelFlyweight viewModelFlyweight, ViewHandler viewHandler) {
+        this.register = viewModelFlyweight.getRegister();
         this.viewHandler = viewHandler;
         emailField.textProperty().bindBidirectional(register.emailProperty());
         passwordField.textProperty().bindBidirectional(register.passwordProperty());
