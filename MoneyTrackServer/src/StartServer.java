@@ -12,7 +12,7 @@ public class StartServer {
 
     public static void main(String[] args) throws RemoteException {
         Registry registry = LocateRegistry.createRegistry(4000);
-        IRegisterServer registerServer = new RegisterServer(new RegisterService(), registry);
+        new RegisterServer(new RegisterService(), registry);
     }
 
 }
