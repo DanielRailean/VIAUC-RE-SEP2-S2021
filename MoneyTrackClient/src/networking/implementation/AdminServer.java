@@ -20,21 +20,11 @@ public class AdminServer implements IAdminServer {
 
     @Override
     public boolean register(User admin) {
-        try {
             return registerServer.register(admin);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     @Override
     public User login(User admin) {
-        try {
-            return registerServer.login(admin);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new User();
+        return registerServer.login(admin);
     }
 }

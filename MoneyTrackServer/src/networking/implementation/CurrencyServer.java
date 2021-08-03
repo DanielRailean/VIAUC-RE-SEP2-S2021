@@ -19,7 +19,7 @@ public class CurrencyServer implements ICurrencyServer {
         try {
             UnicastRemoteObject.exportObject(this,0);
             this.currencyService = currencyService;
-            registry.bind("CurrencyServer", this);
+            registry.bind("CurrenciesServer", this);
             System.out.println("CurrencyServer server started!");
         } catch (Exception e) {
             e.printStackTrace();

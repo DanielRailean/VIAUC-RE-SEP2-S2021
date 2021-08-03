@@ -20,21 +20,11 @@ public class UserServer implements IUserServer {
 
     @Override
     public boolean register(User user) {
-        try {
             return registerServer.register(user);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     @Override
     public User login(User user) {
-        try {
             return registerServer.login(user);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new User();
     }
 }

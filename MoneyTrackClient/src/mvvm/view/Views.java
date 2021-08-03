@@ -5,5 +5,9 @@ public enum Views {
     Main,
     Start,
     Login,
-    BottomBar
+    BottomBar,
+    BottomBarAdmin,
+    AddCurrency,
+    Currencies,
+    UpdateCurrency
 }

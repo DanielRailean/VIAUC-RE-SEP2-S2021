@@ -7,6 +7,7 @@ public class ServicesFlyweight {
     private ServerAccessFlyweight serverAccessFlyweight;
     private IUserService userService;
     private IAdminService adminService;
+    private ICurrencyService currencyService;
 
     public ServicesFlyweight(ServerAccessFlyweight serverAccessFlyweight) {
         this.serverAccessFlyweight = serverAccessFlyweight;
@@ -23,5 +24,11 @@ public class ServicesFlyweight {
             adminService = new AdminService(serverAccessFlyweight.getAdminServer());
         }
         return adminService;
+    }
+    public ICurrencyService getCurrencyService() {
+        if(currencyService == null){
+            currencyService = new CurrencyService(serverAccessFlyweight.getCurrencyServer());
+        }
+        return currencyService;
     }
 }

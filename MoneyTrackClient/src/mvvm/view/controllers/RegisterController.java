@@ -30,7 +30,7 @@ public class RegisterController extends ViewController {
         emailField.textProperty().bindBidirectional(register.emailProperty());
         passwordField.textProperty().bindBidirectional(register.passwordProperty());
         errorLabel.textProperty().bindBidirectional(register.errorProperty());
-        errorLabel.textProperty().setValue("Type email and password to sign up");
+        errorLabel.textProperty().setValue("Type email and password to sign up!");
     }
 
     public void onRegister(MouseEvent mouseEvent){

@@ -7,6 +7,7 @@ public class ServerAccessFlyweight {
     private SessionStorage sessionStorage;
     private IUserServer userServer;
     private IAdminServer adminServer;
+    private ICurrencyServer currencyServer;
 
 
     public ServerAccessFlyweight() {
@@ -31,6 +32,11 @@ public class ServerAccessFlyweight {
         }
         return adminServer;
     }
-
+    public ICurrencyServer getCurrencyServer() {
+        if(currencyServer == null){
+            currencyServer = new CurrencyServer();
+        }
+        return currencyServer;
+    }
 
 }

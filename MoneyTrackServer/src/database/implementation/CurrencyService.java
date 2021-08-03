@@ -64,11 +64,13 @@ public class CurrencyService implements ICurrencyService {
             name = resultSet.getString("name");
             priceInEur = resultSet.getFloat("priceInEur");
             id = resultSet.getInt("id");
+            return new Currency(id,name,priceInEur);
+
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return new Currency(id,name,priceInEur);
+        return null;
     }
 
     @Override
@@ -84,11 +86,12 @@ public class CurrencyService implements ICurrencyService {
             name = resultSet.getString("name");
             priceInEur = resultSet.getFloat("priceInEur");
             id = resultSet.getInt("id");
+            return new Currency(id,name,priceInEur);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return new Currency(id,name,priceInEur);
+        return null;
     }
 
     @Override
@@ -118,7 +121,7 @@ public class CurrencyService implements ICurrencyService {
     public boolean update(Currency currency) {
         System.out.println("trying to update "+currency);
         try (Connection connection = DBAccess.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("update table currencies set name = ?, priceInEur = ? where id = ?"))
+             PreparedStatement preparedStatement = connection.prepareStatement("update currencies set name = ?, priceInEur = ? where id = ?"))
         {
 
             preparedStatement.setString(1, currency.getName());

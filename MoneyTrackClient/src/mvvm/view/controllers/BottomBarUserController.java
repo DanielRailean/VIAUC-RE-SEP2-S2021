@@ -5,7 +5,7 @@ import mvvm.view.ViewController;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
 
-public class BottomBarController extends ViewController {
+public class BottomBarUserController extends ViewController {
     private ViewHandler viewHandler;
 
     @Override
