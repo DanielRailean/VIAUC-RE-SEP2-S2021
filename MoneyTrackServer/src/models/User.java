@@ -23,6 +23,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public User(String email, String password, int id) {
+        this.email = email;
+        this.password = password;
+        this.id = id;
+    }
+
     /**
      * Empty constructor
      */

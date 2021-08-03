@@ -25,8 +25,11 @@ public class ViewHandler {
 
     public void start() throws Exception{
         stage = new Stage();
+        stage.setMinWidth(695);
+        stage.setMinHeight(700);
         OpenView(Views.Main.name());
         setCenterView(Views.Start.name());
+        setBottomView(Views.BottomBar.name());
     }
 
     public void OpenView(String viewName) {
@@ -43,6 +46,14 @@ public class ViewHandler {
         viewController.init(viewModelFlyweight,this);
         Parent root = viewController.getRoot();
         mainController.borderPane.setCenter(root);
-        stage.sizeToScene();
+//        stage.sizeToScene();
+    }
+
+    public void setBottomView(String viewName){
+        viewController = viewControllersFlyweight.getViewController(viewName);
+        viewController.init(viewModelFlyweight,this);
+        Parent root = viewController.getRoot();
+        mainController.borderPane.setBottom(root);
+//        stage.sizeToScene();
     }
 }

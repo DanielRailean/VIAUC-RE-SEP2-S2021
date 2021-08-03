@@ -1,18 +1,18 @@
 package networking.implementation;
 
 import models.User;
-import networking.interfaces.IRegisterServer;
+import networking.interfaces.IUserServer;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class RegisterAccess implements IRegisterServer {
-    private IRegisterServer registerServer;
+public class UserServer implements IUserServer {
+    private IUserServer registerServer;
 
-    public RegisterAccess() {
+    public UserServer() {
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", 4000);
-            this.registerServer = (IRegisterServer) registry.lookup("RegisterServer");
+            this.registerServer = (IUserServer) registry.lookup("UserServer");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,5 +26,15 @@ public class RegisterAccess implements IRegisterServer {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public User login(User user) {
+        try {
+            return registerServer.login(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new User();
     }
 }

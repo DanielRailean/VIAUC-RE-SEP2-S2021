@@ -5,24 +5,24 @@ import javafx.beans.property.StringProperty;
 import models.User;
 import mvvm.model.interfaces.IUserService;
 
-public class Register {
+public class Login {
     private IUserService userService;
 
     private StringProperty error;
     private StringProperty password;
     private StringProperty email;
 
-    public Register(IUserService userService) {
+    public Login(IUserService userService) {
         this.userService = userService;
         error = new SimpleStringProperty();
         password = new SimpleStringProperty();
         email = new SimpleStringProperty();
     }
 
-    public boolean register(){
-        String result = userService.register(new User(email.getValue(),password.getValue()));
+    public boolean login(){
+        String result = userService.login(new User(email.getValue(),password.getValue()));
         error.setValue(result);
-        return result.equals("You are now registered!");
+        return result.equals("Logged in!");
     }
 
     public String getError() {

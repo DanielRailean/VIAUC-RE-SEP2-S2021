@@ -24,6 +24,6 @@ public class StartupController extends ViewController {
     }
     public void redirectLogin(MouseEvent mouseEvent){
         System.out.println("redirect login");
-
+        viewHandler.setCenterView(Views.Login.name());
     }
     }
