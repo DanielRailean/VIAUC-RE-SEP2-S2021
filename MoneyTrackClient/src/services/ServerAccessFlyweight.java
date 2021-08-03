@@ -1,11 +1,11 @@
 package services;
 
-import networking.implementation.RegisterAccess;
-import networking.interfaces.IRegisterServer;
+import networking.implementation.UserServer;
+import networking.interfaces.IUserServer;
 
 public class ServerAccessFlyweight {
     private SessionStorage sessionStorage;
-    private IRegisterServer registerAccess;
+    private IUserServer registerAccess;
 
 
     public ServerAccessFlyweight() {
@@ -18,9 +18,9 @@ public class ServerAccessFlyweight {
         return sessionStorage;
     }
 
-    public IRegisterServer getRegisterAccess() {
+    public IUserServer getRegisterServer() {
         if(registerAccess == null){
-            registerAccess = new RegisterAccess();
+            registerAccess = new UserServer();
         }
         return registerAccess;
     }

@@ -1,7 +1,7 @@
 package database.implementation;
 
 import database.DBAccess;
-import database.interfaces.IRegisterService;
+import database.interfaces.IUserService;
 import models.User;
 
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RegisterService implements IRegisterService {
+public class UserService implements IUserService {
     @Override
     public boolean emailFree(String email) {
         try (Connection connection = DBAccess.getInstance().getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM users WHERE email  = ?"))
@@ -43,5 +43,27 @@ public class RegisterService implements IRegisterService {
             sqlException.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public User login(User user) {
+        System.out.println(user.getEmail()+" " + user.getPassword()+" ");
+        String email = null;
+        String password = null;
+        int id = 0;
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?"))
+        {
+
+            preparedStatement.setString(1, user.getEmail());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            email = resultSet.getString("email");
+            password = resultSet.getString("password");
+            id = resultSet.getInt("id");
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        if(user.getPassword().equals(password)) return new User(email,password,id);
+        return new User();
     }
 }

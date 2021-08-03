@@ -12,14 +12,21 @@ public class User implements Serializable {
     private int id;
 
     /**
-     * Constructor with email and password
+     * Constructor with email password and id
      * @param email userEmail
      * @param password userPassword
+     * @param id userId
      */
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public User(String email, String password, int id) {
+        this.email = email;
+        this.password = password;
+        this.id = id;
     }
 
     /**

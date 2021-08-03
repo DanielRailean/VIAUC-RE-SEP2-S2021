@@ -1,11 +1,12 @@
 package services;
 
 
-import mvvm.viewModel.Register;
+import mvvm.viewModel.*;
 
 public class ViewModelFlyweight {
     private ServicesFlyweight servicesFlyweight;
     private Register register;
+    private Login login;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -13,8 +14,15 @@ public class ViewModelFlyweight {
 
     public Register getRegister() {
         if(register == null){
-            register = new Register(servicesFlyweight.getRegister());
+            register = new Register(servicesFlyweight.getUserService());
         }
         return register;
+    }
+
+    public Login getLogin() {
+        if(login == null){
+            login = new Login(servicesFlyweight.getUserService());
+        }
+        return login;
     }
 }
