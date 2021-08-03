@@ -1,11 +1,12 @@
 package services;
 
-import networking.implementation.UserServer;
-import networking.interfaces.IUserServer;
+import networking.implementation.*;
+import networking.interfaces.*;
 
 public class ServerAccessFlyweight {
     private SessionStorage sessionStorage;
-    private IUserServer registerAccess;
+    private IUserServer userServer;
+    private IAdminServer adminServer;
 
 
     public ServerAccessFlyweight() {
@@ -18,11 +19,17 @@ public class ServerAccessFlyweight {
         return sessionStorage;
     }
 
-    public IUserServer getRegisterServer() {
-        if(registerAccess == null){
-            registerAccess = new UserServer();
+    public IUserServer getUserServer() {
+        if(userServer == null){
+            userServer = new UserServer();
         }
-        return registerAccess;
+        return userServer;
+    }
+    public IAdminServer getAdminServer() {
+        if(adminServer == null){
+            adminServer = new AdminServer();
+        }
+        return adminServer;
     }
 
 

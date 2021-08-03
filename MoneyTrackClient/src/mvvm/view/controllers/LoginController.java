@@ -34,10 +34,7 @@ public class LoginController extends ViewController {
     }
 
     public void login(MouseEvent mouseEvent){
-        System.out.println(login.emailProperty().toString());
-        if(login.login()){
-            System.out.println("You are logged in");
-        }
+        System.out.println(login.login());
     }
     public void back(MouseEvent mouseEvent){
         viewHandler.setCenterView(Views.Start.name());

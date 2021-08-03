@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdminService implements IAdminService {
-    @Override
+
     public boolean emailFree(String email) {
         try (Connection connection = DBAccess.getInstance().getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM administrators WHERE email  = ?"))
         {
@@ -51,7 +51,7 @@ public class AdminService implements IAdminService {
         String email = null;
         String password = null;
         int id = 0;
-        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?"))
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM administrators WHERE email = ?"))
         {
 
             preparedStatement.setString(1, admin.getEmail());

@@ -21,7 +21,7 @@ public class ViewModelFlyweight {
 
     public Login getLogin() {
         if(login == null){
-            login = new Login(servicesFlyweight.getUserService());
+            login = new Login(servicesFlyweight.getUserService(),servicesFlyweight.getAdminService());
         }
         return login;
     }

@@ -63,4 +63,13 @@ public class User implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

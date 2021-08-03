@@ -3,26 +3,37 @@ package mvvm.viewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import models.User;
+import mvvm.model.Validator;
+import mvvm.model.interfaces.IAdminService;
 import mvvm.model.interfaces.IUserService;
 
 public class Login {
     private IUserService userService;
+    private IAdminService adminService;
 
     private StringProperty error;
     private StringProperty password;
     private StringProperty email;
 
-    public Login(IUserService userService) {
+    public Login(IUserService userService, IAdminService adminService) {
+        this.adminService = adminService;
         this.userService = userService;
         error = new SimpleStringProperty();
         password = new SimpleStringProperty();
         email = new SimpleStringProperty();
     }
 
-    public boolean login(){
-        String result = userService.login(new User(email.getValue(),password.getValue()));
+    public String login(){
+        String result;
+        if(Validator.isValidAdminEmail(email.getValue())){
+            result = adminService.login(new User(email.getValue(),password.getValue()));
+            error.setValue(result);
+            return result;
+        }
+        result = userService.login(new User(email.getValue(),password.getValue()));
         error.setValue(result);
-        return result.equals("Logged in!");
+        return result;
+
     }
 
     public String getError() {

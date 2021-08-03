@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserService implements IUserService {
-    @Override
+
     public boolean emailFree(String email) {
         try (Connection connection = DBAccess.getInstance().getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM users WHERE email  = ?"))
         {

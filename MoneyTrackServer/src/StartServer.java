@@ -13,6 +13,7 @@ public class StartServer {
         Registry registry = LocateRegistry.createRegistry(4000);
         new UserServer(new UserService(), registry);
         new AdminServer(new AdminService(),registry);
+        new CurrencyServer(new CurrencyService(),registry);
     }
 
 }
