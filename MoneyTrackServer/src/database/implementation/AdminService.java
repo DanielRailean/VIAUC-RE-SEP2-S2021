@@ -1,7 +1,7 @@
 package database.implementation;
 
 import database.DBAccess;
-import database.interfaces.IUserService;
+import database.interfaces.IAdminService;
 import models.User;
 
 import java.sql.Connection;
@@ -9,10 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserService implements IUserService {
+public class AdminService implements IAdminService {
 
     public boolean emailFree(String email) {
-        try (Connection connection = DBAccess.getInstance().getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM users WHERE email  = ?"))
+        try (Connection connection = DBAccess.getInstance().getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM administrators WHERE email  = ?"))
         {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -26,15 +26,15 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean register(User user) {
-        System.out.println(user.getEmail()+" " + user.getPassword()+" "+ emailFree(user.getEmail()));
-        if(!emailFree(user.getEmail())) return false;
+    public boolean register(User admin) {
+        System.out.println(admin.getEmail()+" " + admin.getPassword()+" "+ emailFree(admin.getEmail()));
+        if(!emailFree(admin.getEmail())) return false;
 
-        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(email, password) values(?, ?)"))
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO administrators(email, password) values(?, ?)"))
         {
 
-            preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(1, admin.getEmail());
+            preparedStatement.setString(2, admin.getPassword());
 
             boolean result = preparedStatement.executeUpdate() > 0;
             return result;
@@ -46,15 +46,15 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User login(User user) {
-        System.out.println(user.getEmail()+" " + user.getPassword()+" ");
+    public User login(User admin) {
+        System.out.println(admin.getEmail()+" " + admin.getPassword()+" ");
         String email = null;
         String password = null;
         int id = 0;
-        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?"))
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM administrators WHERE email = ?"))
         {
 
-            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(1, admin.getEmail());
             ResultSet resultSet = preparedStatement.executeQuery();
             email = resultSet.getString("email");
             password = resultSet.getString("password");
@@ -63,7 +63,7 @@ public class UserService implements IUserService {
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        if(user.getPassword().equals(password)) return new User(email,password,id);
+        if(admin.getPassword().equals(password)) return new User(email,password,id);
         return new User();
     }
 }

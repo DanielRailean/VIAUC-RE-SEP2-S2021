@@ -7,18 +7,19 @@ import services.SessionStorage;
 import mvvm.model.Validator;
 
 public class UserService implements IUserService {
-    private IUserServer registerServer;
+    private IUserServer userServer;
 
-    public UserService(IUserServer registerServer) {
-        this.registerServer = registerServer;
+    public UserService(IUserServer userServer) {
+        this.userServer = userServer;
     }
 
     @Override
     public String register(User user) {
         boolean result;
+        if(Validator.isValidAdminEmail(user.getEmail())) return "Not for admin registration!";
         if(!Validator.isValidEmail(user.getEmail())) return "Email invalid!";
         if(!Validator.isValidPassword(user.getPassword())) return "Password should contain 5-30 characters";
-            result = registerServer.register(user);
+            result = userServer.register(user);
         if (result) {
             return "You are now registered, go back to sign in!";
         }
@@ -30,12 +31,12 @@ public class UserService implements IUserService {
         User result;
         if(!Validator.isValidEmail(user.getEmail())) return "Email invalid!";
         if(!Validator.isValidPassword(user.getPassword())) return "Password should contain 5-30 characters";
-        result = registerServer.login(user);
+        result = userServer.login(user);
         if (result.getPassword()!=null) {
             SessionStorage.getInstance().setCurrentUser(result);
-            System.out.println(SessionStorage.getInstance().getCurrentUser().getId());
+            System.out.println("current user "+SessionStorage.getInstance().getCurrentUser());
             System.out.println("logged in "+ user.getEmail());
-            return "Logged in!";
+            return "Logged in as user!";
         }
         return "Unable to login, password or email incorrect!";
     }

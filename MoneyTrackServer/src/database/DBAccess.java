@@ -40,6 +40,10 @@ public class DBAccess {
         {
             createUsersTable(statement);
             insertDefaultUser(statement);
+            createAdminsTable(statement);
+            insertDefaultAdmins(statement);
+            createCurrenciesTable(statement);
+            insertDefaultCurrencies(statement);
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -50,6 +54,19 @@ public class DBAccess {
     }
 
     private void insertDefaultUser(Statement statement) throws SQLException{
-        statement.executeUpdate("INSERT OR IGNORE INTO users(email,password) values ('dd','dd')");
+        statement.executeUpdate("INSERT OR IGNORE INTO users(email,password) values ('dd@dd.com','ddddd')");
     }
+    private void createAdminsTable(Statement statement) throws SQLException {
+        statement.executeUpdate("CREATE TABLE IF NOT EXISTS administrators(id INTEGER PRIMARY KEY AUTOINCREMENT ,email varchar(30) unique not null, password varchar(30) not null)");
+    }
+    private void insertDefaultAdmins(Statement statement) throws SQLException {
+        statement.executeUpdate("INSERT OR IGNORE INTO administrators(email,password) values ('dd@mt.com','ddddd')");
+    }
+    private void createCurrenciesTable(Statement statement) throws SQLException {
+        statement.executeUpdate("CREATE TABLE IF NOT EXISTS currencies(id INTEGER PRIMARY KEY AUTOINCREMENT ,name varchar(10) unique not null, priceInEur REAL not null)");
+    }
+    private void insertDefaultCurrencies(Statement statement) throws SQLException{
+        statement.executeUpdate("INSERT OR IGNORE INTO currencies(name,priceInEur) values ('EUR', 1),('DKK',0.135),('USD',0.8421)");
+    }
+
 }

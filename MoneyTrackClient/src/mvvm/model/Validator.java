@@ -15,6 +15,7 @@ public class Validator {
     public static final int MAX_CURRENCY_NAME = 10;
     public static final int MAX_CATEGORY_NAME = 50;
     public static final int MAX_ACCOUNT_NAME = 20;
+    public static final String ADMIN_DOMAIN = "@mt.com";
     public static final String emailRegex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
     public static boolean isValidPassword(String password){
@@ -26,34 +27,38 @@ public class Validator {
         return matcher.matches();
     }
 
-    public boolean isValidIncome(int amount){
+    public static boolean isValidAdminEmail(String email){
+        return isValidEmail(email)&&email.contains(ADMIN_DOMAIN);
+    }
+
+    public static boolean isValidIncome(int amount){
         return amount>=0&&amount<=MAX_INCOME;
     };
-    public boolean isValidExpense(int amount){
+    public static boolean isValidExpense(int amount){
         return amount>=0&&amount<=MAX_EXPENSE;
 
     };
-    public boolean isValidBalance(int amount){
+    public static boolean isValidBalance(int amount){
         return amount>=0&&amount<=MAX_START_BALANCE;
     };
-    public boolean isValidPriceInEur(double amount){
+    public static boolean isValidPriceInEur(double amount){
         return amount>=0&&amount<=MAX_PRICE_IN_EUR;
 
     };
 
-    public boolean isValidExpenseDescription(String text){
-        return text.length()>=0&&text.length()<=MAX_EXPENSE_DESCRIPTION;
+    public static boolean isValidExpenseDescription(String text){
+        return text.length()<=MAX_EXPENSE_DESCRIPTION;
     }
-    public boolean isValidIncomeDescription(String text){
+    public static boolean isValidIncomeDescription(String text){
         return text.length()>=0&&text.length()<=MAX_INCOME_DESCRIPTION;
     }
-    public boolean isValidCurrencyName(String text){
+    public static boolean isValidCurrencyName(String text){
         return text.length()>=0&&text.length()<=MAX_CURRENCY_NAME;
     }
-    public boolean isValidCategoryName(String text){
+    public static boolean isValidCategoryName(String text){
         return text.length()>=0&&text.length()<=MAX_CATEGORY_NAME;
     }
-    public boolean isValidAccountName(String text){
+    public static boolean isValidAccountName(String text){
         return text.length()>=0&&text.length()<=MAX_ACCOUNT_NAME;
     }
 

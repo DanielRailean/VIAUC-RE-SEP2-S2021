@@ -30,14 +30,14 @@ public class LoginController extends ViewController {
         emailField.textProperty().bindBidirectional(login.emailProperty());
         passwordField.textProperty().bindBidirectional(login.passwordProperty());
         errorLabel.textProperty().bindBidirectional(login.errorProperty());
-        errorLabel.textProperty().setValue("Type email and password to log in up");
+        errorLabel.textProperty().setValue("Type email and password to log in!");
     }
 
     public void login(MouseEvent mouseEvent){
-        System.out.println(login.emailProperty().toString());
-        if(login.login()){
-            System.out.println("You are logged in");
-        }
+        String result = login.login();
+        if(result.equals("Logged in as user!")) viewHandler.setBottomView(Views.BottomBar.name());
+        else if (result.equals("Logged in as admin!")) viewHandler.setBottomView(Views.BottomBarAdmin.name());
+        System.out.println(result);
     }
     public void back(MouseEvent mouseEvent){
         viewHandler.setCenterView(Views.Start.name());

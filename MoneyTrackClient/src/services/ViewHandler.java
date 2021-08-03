@@ -29,7 +29,7 @@ public class ViewHandler {
         stage.setMinHeight(700);
         OpenView(Views.Main.name());
         setCenterView(Views.Start.name());
-        setBottomView(Views.BottomBar.name());
+        setBottomView(Views.BottomBarAdmin.name());
     }
 
     public void OpenView(String viewName) {
@@ -39,6 +39,8 @@ public class ViewHandler {
         scene= viewController.getScene();
         stage.setScene(scene);
         stage.show();
+//        Stage newStage = new Stage();
+//        newStage.show();
     }
 
     public void setCenterView(String viewName){
