@@ -24,7 +24,7 @@ public class BottomBarAdminController extends ViewController {
 
     }
     public void administrators(MouseEvent mouseEvent){
-        System.out.println("administrators");
+        viewHandler.setCenterView(Views.RegisterAdmin.name());
 
     }
     public void settings(MouseEvent mouseEvent){

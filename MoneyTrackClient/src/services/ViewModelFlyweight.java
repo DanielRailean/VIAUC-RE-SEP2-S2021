@@ -11,6 +11,7 @@ public class ViewModelFlyweight {
     private Currencies currencies;
     private AddCategory addCategory;
     private Categories categories;
+    private RegisterAdmin registerAdmin;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -64,6 +65,12 @@ public class ViewModelFlyweight {
     public UpdateCategory getUpdateCategory() {
         
         return new UpdateCategory(servicesFlyweight.getCategoryService());
+    }
+    public RegisterAdmin getRegisterAdmin(){
+        if(registerAdmin == null){
+            registerAdmin = new RegisterAdmin(servicesFlyweight.getAdminService());
+        }
+        return registerAdmin;
     }
 
 }

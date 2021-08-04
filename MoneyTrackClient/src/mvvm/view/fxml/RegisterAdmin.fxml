@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.RegisterController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.RegisterAdminController">
    <children>
       <PasswordField fx:id="passwordField" layoutX="157.0" layoutY="212.0" promptText="password">
          <font>
@@ -16,12 +16,12 @@
          <font>
             <Font name="Yu Gothic Light" size="29.0" />
          </font></Label>
-      <Label fx:id="registerLabel" layoutX="484.0" layoutY="350.0" onMouseClicked="#onRegister" text="Register" textAlignment="CENTER">
+      <Label layoutX="484.0" layoutY="350.0" onMouseClicked="#onRegister" text="Register" textAlignment="CENTER">
          <font>
             <Font name="Yu Gothic Light" size="29.0" />
          </font>
       </Label>
-      <TextField fx:id="emailField" layoutX="157.0" layoutY="153.0" promptText="email">
+      <TextField fx:id="emailField" layoutX="157.0" layoutY="153.0" promptText="new admin email">
          <font>
             <Font name="Yu Gothic Light" size="25.0" />
          </font></TextField>
@@ -30,7 +30,7 @@
             <Font name="Yu Gothic Light" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="113.0" layoutY="14.0" text="Register to MoneyTrack">
+      <Label layoutX="113.0" layoutY="14.0" text="Add new admin">
          <font>
             <Font name="Yu Gothic Light" size="37.0" />
          </font>
