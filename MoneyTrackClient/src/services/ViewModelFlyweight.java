@@ -9,6 +9,8 @@ public class ViewModelFlyweight {
     private Login login;
     private AddCurrency addCurrency;
     private Currencies currencies;
+    private AddCategory addCategory;
+    private Categories categories;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -42,6 +44,26 @@ public class ViewModelFlyweight {
     }
 
     public UpdateCurrency getUpdateCurrency() {
+        
         return new UpdateCurrency(servicesFlyweight.getCurrencyService());
     }
+
+    public AddCategory getAddCategory() {
+        if(addCategory == null){
+            addCategory = new AddCategory(servicesFlyweight.getCategoryService());
+        }
+        return addCategory;
+    }
+    public Categories getCategories() {
+        if(categories == null){
+            categories = new Categories(servicesFlyweight.getCategoryService());
+        }
+        return categories;
+    }
+
+    public UpdateCategory getUpdateCategory() {
+        
+        return new UpdateCategory(servicesFlyweight.getCategoryService());
+    }
+
 }

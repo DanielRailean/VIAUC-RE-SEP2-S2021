@@ -9,5 +9,8 @@ public enum Views {
     BottomBarAdmin,
     AddCurrency,
     Currencies,
-    UpdateCurrency
+    UpdateCurrency,
+    AddCategory,
+    Categories,
+    UpdateCategory
 }

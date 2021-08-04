@@ -114,6 +114,7 @@ public class CategoryService implements ICategoryService {
         {
 
             preparedStatement.setString(1, category.getName());
+            preparedStatement.setInt(2, category.getId());
             boolean result = preparedStatement.executeUpdate() > 0;
             return result;
         }

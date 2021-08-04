@@ -1,5 +1,6 @@
 package services;
 
+import mvvm.model.interfaces.ICategoryService;
 import networking.implementation.*;
 import networking.interfaces.*;
 
@@ -8,6 +9,7 @@ public class ServerAccessFlyweight {
     private IUserServer userServer;
     private IAdminServer adminServer;
     private ICurrencyServer currencyServer;
+    private ICategoryServer categoryServer;
 
 
     public ServerAccessFlyweight() {
@@ -37,6 +39,12 @@ public class ServerAccessFlyweight {
             currencyServer = new CurrencyServer();
         }
         return currencyServer;
+    }
+    public ICategoryServer getCategoryServer() {
+        if(categoryServer == null){
+            categoryServer = new CategoryServer();
+        }
+        return categoryServer;
     }
 
 }

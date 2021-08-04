@@ -18,7 +18,7 @@ public class CategoryServer implements ICategoryServer {
         try {
             UnicastRemoteObject.exportObject(this,0);
             this.categoryService = categoryService;
-            registry.bind("CurrenciesServer", this);
+            registry.bind("CategoriesServer", this);
             System.out.println("CategoryServer server started!");
         } catch (Exception e) {
             e.printStackTrace();
