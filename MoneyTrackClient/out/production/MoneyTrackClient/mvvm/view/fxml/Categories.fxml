@@ -8,15 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.CurrenciesController">
+<AnchorPane prefHeight="400.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.CategoriesController">
    <children>
       <TableView fx:id="table" layoutX="202.0" layoutY="100.0" prefHeight="200.0" prefWidth="252.0">
         <columns>
-          <TableColumn fx:id="tableName" prefWidth="119.0" text="Currency name" />
-          <TableColumn fx:id="tablePrice" prefWidth="132.0" text="Price in EURO" />
+          <TableColumn fx:id="tableName" prefWidth="251.0" text="Category name" />
         </columns>
       </TableView>
-      <Label layoutX="64.0" layoutY="36.0" prefHeight="37.0" prefWidth="149.0" text="Currencies">
+      <Label layoutX="64.0" layoutY="36.0" prefHeight="37.0" prefWidth="149.0" text="Categories">
          <font>
             <Font name="Yu Gothic Light" size="22.0" />
          </font>

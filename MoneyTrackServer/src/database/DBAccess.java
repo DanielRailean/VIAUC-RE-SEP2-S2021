@@ -44,6 +44,8 @@ public class DBAccess {
             insertDefaultAdmins(statement);
             createCurrenciesTable(statement);
             insertDefaultCurrencies(statement);
+            createCategoriesTable(statement);
+            insertDefaultCategories(statement);
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -67,6 +69,12 @@ public class DBAccess {
     }
     private void insertDefaultCurrencies(Statement statement) throws SQLException{
         statement.executeUpdate("INSERT OR IGNORE INTO currencies(name,priceInEur) values ('EUR', 1),('DKK',0.135),('USD',0.8421)");
+    }
+    private void createCategoriesTable(Statement statement) throws SQLException {
+        statement.executeUpdate("CREATE TABLE IF NOT EXISTS categories(id INTEGER PRIMARY KEY AUTOINCREMENT ,name varchar(50) unique not null)");
+    }
+    private void insertDefaultCategories(Statement statement) throws SQLException{
+        statement.executeUpdate("INSERT OR IGNORE INTO categories(name) values ('Food'),('Services'),('Housing')");
     }
 
 }

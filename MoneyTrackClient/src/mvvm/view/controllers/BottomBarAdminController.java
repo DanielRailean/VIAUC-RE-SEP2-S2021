@@ -15,6 +15,7 @@ public class BottomBarAdminController extends ViewController {
     }
     public void categories(MouseEvent mouseEvent){
         System.out.println("categories");
+        viewHandler.setCenterView(Views.Categories.name());
 
     }
     public void currencies(MouseEvent mouseEvent){

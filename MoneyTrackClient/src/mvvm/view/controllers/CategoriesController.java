@@ -6,25 +6,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import models.Currency;
+import models.Category;
 import mvvm.view.ViewController;
 import mvvm.view.Views;
-import mvvm.viewModel.Currencies;
+import mvvm.viewModel.Categories;
 import services.SessionStorage;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
 
 
-public class CurrenciesController extends ViewController {
+public class CategoriesController extends ViewController {
     private ViewHandler viewHandler;
-    private Currencies currenciesVM;
+    private Categories categoriesVM;
 
     @FXML
-    private TableView<Currency> table;
+    private TableView<Category> table;
     @FXML
-    private TableColumn<String , Currency> tableName;
-    @FXML
-    private TableColumn<Float, Currency> tablePrice;
+    private TableColumn<String , Category> tableName;
     @FXML
     private Label error;
 
@@ -33,11 +31,10 @@ public class CurrenciesController extends ViewController {
     public void init(ViewModelFlyweight viewModelFlyweight, ViewHandler viewHandler) {
 
         this.viewHandler = viewHandler;
-        this.currenciesVM = viewModelFlyweight.getCurrencies();
+        this.categoriesVM = viewModelFlyweight.getCategories();
         tableName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tablePrice.setCellValueFactory(new PropertyValueFactory<>("priceInEuro"));
-        table.setItems(currenciesVM.getCurrencies());
-        error.textProperty().bindBidirectional(currenciesVM.errorProperty());
+        table.setItems(categoriesVM.getCategories());
+        error.textProperty().bindBidirectional(categoriesVM.errorProperty());
 
     }
     public void back(MouseEvent mouseEvent){
@@ -47,12 +44,12 @@ public class CurrenciesController extends ViewController {
     }
     public void add(MouseEvent mouseEvent){
         System.out.println("add");
-        viewHandler.setCenterView(Views.AddCurrency.name());
+        viewHandler.setCenterView(Views.AddCategory.name());
     }
     public void update(MouseEvent mouseEvent){
         System.out.println("update " + table.getFocusModel().getFocusedItem().getId());
-        SessionStorage.setItem("updatedCurrency", table.getFocusModel().getFocusedItem());
-        viewHandler.setCenterView(Views.UpdateCurrency.name());
+        SessionStorage.setItem("updatedCategory", table.getFocusModel().getFocusedItem());
+        viewHandler.setCenterView(Views.UpdateCategory.name());
 
     }
 }
