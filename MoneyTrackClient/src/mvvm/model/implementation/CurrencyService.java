@@ -17,7 +17,7 @@ public class CurrencyService implements ICurrencyService {
     @Override
     public String add(Currency currency) {
         if(!Validator.isValidCurrencyName(currency.getName())) return "Name invalid!";
-        if(!Validator.isValidPriceInEur(currency.getPriceInEuro())) return "price should be between 0 and 10^7";
+        if(!Validator.isValidPriceInEur(currency.getPriceInEuro())) return "Price should be between 0 and 10^7";
         if (currencyServer.add(currency)) {
             return "Currency successfully added";
         }

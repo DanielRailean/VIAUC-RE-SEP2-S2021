@@ -21,7 +21,7 @@
             <Font name="Yu Gothic Light" size="29.0" />
          </font>
       </Label>
-      <TextField fx:id="emailField" layoutX="157.0" layoutY="153.0" promptText="email">
+      <TextField fx:id="emailField" layoutX="157.0" layoutY="153.0" promptText="new admin email">
          <font>
             <Font name="Yu Gothic Light" size="25.0" />
          </font></TextField>
@@ -30,7 +30,7 @@
             <Font name="Yu Gothic Light" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="113.0" layoutY="14.0" text="Register to MoneyTrack">
+      <Label layoutX="113.0" layoutY="14.0" text="Add new admin">
          <font>
             <Font name="Yu Gothic Light" size="37.0" />
          </font>

@@ -16,11 +16,11 @@ public class AdminService implements IAdminService {
     @Override
     public String register(User admin) {
         boolean result;
-        if(!Validator.isValidAdminEmail(admin.getEmail())) return "Email invalid!";
+        if(!Validator.isValidAdminEmail(admin.getEmail())) return "Admin email invalid!";
         if(!Validator.isValidPassword(admin.getPassword())) return "Password should contain 5-30 characters";
         result = adminServer.register(admin);
         if (result) {
-            return "You are now registered, go back to sign in!";
+            return "Admin successfully added! He can sign in now";
         }
         return "Unable to register, try using another email address!";
     }
