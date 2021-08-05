@@ -66,4 +66,14 @@ public class UserService implements IUserService {
         if(user.getPassword().equals(password)) return new User(email,password,id);
         return new User();
     }
+
+    @Override
+    public boolean changePassword(User user, String newPassword) {
+        return false;
+    }
+
+    @Override
+    public boolean changeEmail(User user, String newEmail) {
+        return false;
+    }
 }
