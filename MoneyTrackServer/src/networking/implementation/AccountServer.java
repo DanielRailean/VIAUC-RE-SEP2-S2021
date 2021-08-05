@@ -2,6 +2,7 @@ package networking.implementation;
 
 
 import database.interfaces.IAccountService;
+import database.interfaces.IUserService;
 import models.Account;
 import networking.interfaces.IAccountServer;
 
@@ -13,11 +14,13 @@ import java.util.List;
 public class AccountServer implements IAccountServer {
 
     private IAccountService accountService;
+    private IUserService userService;
 
-    public AccountServer(IAccountService accountService, Registry registry) {
+    public AccountServer(IAccountService accountService, IUserService userService, Registry registry) {
         try {
             UnicastRemoteObject.exportObject(this,0);
             this.accountService = accountService;
+            this.userService = userService;
             registry.bind("AccountServer", this);
             System.out.println("AccountServer server started!");
         } catch (Exception e) {
@@ -42,8 +45,10 @@ public class AccountServer implements IAccountServer {
     }
 
     @Override
-    public boolean shareWith(int accountId, int shareWith) throws RemoteException {
-        return accountService.shareWith(accountId,shareWith);
+    public boolean shareWith(int accountId, String shareWith) throws RemoteException {
+        int id = userService.getId(shareWith);
+        if(id ==0) return false;
+        return accountService.shareWith(accountId,id);
     }
 
     @Override

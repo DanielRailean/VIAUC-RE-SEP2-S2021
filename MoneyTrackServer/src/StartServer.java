@@ -11,11 +11,12 @@ public class StartServer {
 
     public static void main(String[] args) throws RemoteException {
         Registry registry = LocateRegistry.createRegistry(4000);
-        new UserServer(new UserService(), registry);
+        UserService userService = new UserService();
+        new UserServer(userService, registry);
         new AdminServer(new AdminService(),registry);
         new CurrencyServer(new CurrencyService(),registry);
         new CategoryServer(new CategoryService(), registry);
-        new AccountServer(new AccountService(),registry);
+        new AccountServer(new AccountService(),userService,registry);
     }
 
 }

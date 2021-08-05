@@ -13,5 +13,6 @@ public enum Views {
     AddCategory,
     Categories,
     UpdateCategory,
-    RegisterAdmin
+    RegisterAdmin,
+    Accounts
 }

@@ -31,14 +31,14 @@ public class Validator {
         return isValidEmail(email)&&email.contains(ADMIN_DOMAIN);
     }
 
-    public static boolean isValidIncome(int amount){
+    public static boolean isValidIncome(float amount){
         return amount>=0&&amount<=MAX_INCOME;
     };
-    public static boolean isValidExpense(int amount){
+    public static boolean isValidExpense(float amount){
         return amount>=0&&amount<=MAX_EXPENSE;
 
     };
-    public static boolean isValidBalance(int amount){
+    public static boolean isValidBalance(float amount){
         return amount>=0&&amount<=MAX_START_BALANCE;
     };
     public static boolean isValidPriceInEur(double amount){

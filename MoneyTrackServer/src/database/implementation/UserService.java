@@ -62,4 +62,18 @@ public class UserService implements IUserService {
     public boolean changeEmail(User user, String newEmail) {
         return false;
     }
+
+    @Override
+    public int getId(String email) {
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?"))
+        {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.getInt("id");
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return 0;
+    }
 }

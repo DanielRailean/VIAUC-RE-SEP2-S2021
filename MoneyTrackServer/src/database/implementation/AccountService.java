@@ -42,7 +42,9 @@ public class AccountService implements IAccountService {
         int currencyId;
         int ownerId;
         int sharedWith;
-        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM currencies WHERE id = ?"))
+        String sharedEmail;
+        String currencyName;
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM accounts INNER JOIN currencies on accounts.currencyId = currencies.id INNER JOIN users on accounts.sharedWith = users.id WHERE id = ?"))
         {
             preparedStatement.setInt(1, accountId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -52,7 +54,10 @@ public class AccountService implements IAccountService {
             ownerId = resultSet.getInt("ownerId");
             currencyId = resultSet.getInt("currencyId");
             sharedWith = resultSet.getInt("sharedWith");
-            return new Account(id,name,balance,ownerId,currencyId,sharedWith);
+            currencyName = resultSet.getString("name:1");
+            sharedEmail = resultSet.getString("email");
+            return new Account(id,name,balance,ownerId,currencyId,sharedWith,currencyName,sharedEmail);
+
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -68,11 +73,13 @@ public class AccountService implements IAccountService {
         int currencyId;
         int ownerId;
         int sharedWith;
+        String sharedEmail;
+        String currencyName;
         List<Account> accounts = new ArrayList<>();
         try
         {
             Connection connection = DBAccess.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM currencies WHERE ownerId = ? or sharedWith = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM accounts INNER JOIN currencies on accounts.currencyId = currencies.id INNER JOIN users on accounts.sharedWith = users.id WHERE ownerId =? or sharedWith =?");
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -83,8 +90,11 @@ public class AccountService implements IAccountService {
                 ownerId = resultSet.getInt("ownerId");
                 currencyId = resultSet.getInt("currencyId");
                 sharedWith = resultSet.getInt("sharedWith");
-                accounts.add(new Account(id,name,balance,ownerId,currencyId,sharedWith));
+                currencyName = resultSet.getString(8);
+                sharedEmail = resultSet.getString("email");
+                accounts.add(new Account(id,name,balance,ownerId,currencyId,sharedWith,currencyName,sharedEmail));
             }
+            return accounts;
         }
         catch (Exception e) {
             e.printStackTrace();

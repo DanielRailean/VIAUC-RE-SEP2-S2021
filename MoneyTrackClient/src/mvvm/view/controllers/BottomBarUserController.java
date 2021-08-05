@@ -2,6 +2,7 @@ package mvvm.view.controllers;
 
 import javafx.scene.input.MouseEvent;
 import mvvm.view.ViewController;
+import mvvm.view.Views;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
 
@@ -21,7 +22,7 @@ public class BottomBarUserController extends ViewController {
     }
     public void accounts(MouseEvent mouseEvent){
         System.out.println("accounts");
-
+        viewHandler.setCenterView(Views.Accounts.name());
     }
     public void budgets(MouseEvent mouseEvent){
         System.out.println("budgets");

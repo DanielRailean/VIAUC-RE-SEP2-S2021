@@ -12,6 +12,7 @@ public class ViewModelFlyweight {
     private AddCategory addCategory;
     private Categories categories;
     private RegisterAdmin registerAdmin;
+    private Accounts accounts;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -73,4 +74,8 @@ public class ViewModelFlyweight {
         return registerAdmin;
     }
 
+    public Accounts getAccounts() {
+        if(accounts == null) accounts = new Accounts(servicesFlyweight.getAccountService());
+        return accounts;
+    }
 }
