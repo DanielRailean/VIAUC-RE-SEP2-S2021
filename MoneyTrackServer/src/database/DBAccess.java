@@ -46,6 +46,8 @@ public class DBAccess {
             insertDefaultCurrencies(statement);
             createCategoriesTable(statement);
             insertDefaultCategories(statement);
+            createAccountsTable(statement);
+            insertDefaultAccounts(statement);
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -75,6 +77,12 @@ public class DBAccess {
     }
     private void insertDefaultCategories(Statement statement) throws SQLException{
         statement.executeUpdate("INSERT OR IGNORE INTO categories(name) values ('Food'),('Services'),('Housing')");
+    }
+    private void createAccountsTable(Statement statement) throws SQLException {
+        statement.executeUpdate("CREATE TABLE IF NOT EXISTS accounts(id INTEGER PRIMARY KEY AUTOINCREMENT ,name varchar(20) unique not null, balance real not null, currencyId INTEGER NOT NULL, ownerId INTEGER NOT NULL, sharedWith INTEGER NOT NULL, FOREIGN KEY(currencyId) REFERENCES currencies(id), FOREIGN KEY(ownerId) REFERENCES users(id), FOREIGN KEY(sharedWith) REFERENCES users(id))");
+    }
+    private void insertDefaultAccounts(Statement statement) throws SQLException{
+        statement.executeUpdate("INSERT OR IGNORE INTO accounts(name,balance,currencyId,ownerId,sharedWith) values ('Cash',0,2,1,null)");
     }
 
 }

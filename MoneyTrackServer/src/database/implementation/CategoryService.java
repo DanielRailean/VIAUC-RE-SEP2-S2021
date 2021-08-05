@@ -11,28 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryService implements ICategoryService {
-    public boolean nameFree(String name){
-        try (Connection connection = DBAccess.getInstance().getConnection();
-             PreparedStatement preparedStatement =
-                     connection.prepareStatement("SELECT count(*) as count FROM categories WHERE name = ?"))
-        {
-            preparedStatement.setString(1, name);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            boolean result = resultSet.getInt("count") == 0;
-            return result;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     @Override
     public boolean add(Category category) {
         System.out.println("trying to add "+category);
-        if(!nameFree(category.getName())) return false;
-
         try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO categories(name) values(?)"))
         {
 

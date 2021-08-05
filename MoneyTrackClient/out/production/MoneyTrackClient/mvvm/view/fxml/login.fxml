@@ -12,7 +12,7 @@
          <font>
             <Font name="Yu Gothic Light" size="25.0" />
          </font></PasswordField>
-      <Label fx:id="errorLabel" layoutX="14.0" layoutY="32.0" prefHeight="124.0" prefWidth="562.0" text="Error" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="errorLabel" layoutX="4.0" layoutY="32.0" prefHeight="124.0" prefWidth="592.0" text="Error" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Yu Gothic Light" size="27.0" />
          </font></Label>
