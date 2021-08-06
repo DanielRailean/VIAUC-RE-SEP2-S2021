@@ -14,6 +14,7 @@ public class ViewModelFlyweight {
     private RegisterAdmin registerAdmin;
     private Accounts accounts;
     private AddAccount addAccount;
+    private UpdateAccount updateAccount;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -83,5 +84,9 @@ public class ViewModelFlyweight {
     public AddAccount getAddAccount(){
         if(addAccount == null) addAccount = new AddAccount(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService());
         return addAccount;
+    }
+
+    public UpdateAccount getUpdateAccount(){
+        return new UpdateAccount(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService());
     }
 }

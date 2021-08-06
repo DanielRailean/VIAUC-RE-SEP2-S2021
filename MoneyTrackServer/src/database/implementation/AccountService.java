@@ -124,12 +124,13 @@ public class AccountService implements IAccountService {
     public boolean update(Account account) {
         System.out.println("Trying to update "+account);
         try (Connection connection = DBAccess.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("update accounts set name= ? balance=? currencyId =? where id =?"))
+             PreparedStatement preparedStatement = connection.prepareStatement("update accounts set name= ?, balance = ? ,currencyId =? where id =?"))
         {
 
             preparedStatement.setString(1, account.getName());
             preparedStatement.setFloat(2, account.getBalance());
             preparedStatement.setInt(3, account.getCurrencyId());
+            preparedStatement.setInt(4,account.getId());
 
             return preparedStatement.executeUpdate() > 0;
         }

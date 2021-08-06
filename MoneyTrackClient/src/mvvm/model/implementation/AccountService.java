@@ -47,10 +47,10 @@ public class AccountService implements IAccountService {
     public String update(Account account) {
         if(!Validator.isValidAccountName(account.getName())) return "Name invalid!";
         if(!Validator.isValidBalance(account.getBalance())) return "Balance invalid!";
-        if (accountServer.add(account)) {
+        if (accountServer.update(account)) {
             return "Account successfully updated";
         }
-        return "Unable to update account , most likely , name is already taken !";
+        return "Unable to update account , please try again later!";
     }
 
     @Override
