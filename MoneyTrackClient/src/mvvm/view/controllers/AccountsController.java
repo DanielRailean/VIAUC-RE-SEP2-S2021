@@ -50,7 +50,7 @@ public class AccountsController extends ViewController {
     }
     public void add(MouseEvent mouseEvent){
         System.out.println("add");
-//        viewHandler.setCenterView(Views.AddAccount.name());
+        viewHandler.setCenterView(Views.AddAccount.name());
     }
     public void update(MouseEvent mouseEvent){
         System.out.println("update " + table.getFocusModel().getFocusedItem().getId());

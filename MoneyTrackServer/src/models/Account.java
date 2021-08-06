@@ -22,6 +22,14 @@ public class Account implements Serializable {
         this.sharedEmail = sharedEmail;
     }
 
+    public Account(String name, float balance, int ownerId, int currencyId, int sharedWith) {
+        this.name = name;
+        this.balance = balance;
+        this.ownerId = ownerId;
+        this.currencyId = currencyId;
+        this.sharedWith = sharedWith;
+    }
+
     public Account(int id, String name, float balance, int ownerId, int currencyId, int sharedWith, String currencyName, String sharedEmail) {
         this.id = id;
         this.name = name;
