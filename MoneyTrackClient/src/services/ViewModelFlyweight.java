@@ -12,6 +12,9 @@ public class ViewModelFlyweight {
     private AddCategory addCategory;
     private Categories categories;
     private RegisterAdmin registerAdmin;
+    private Accounts accounts;
+    private AddAccount addAccount;
+    private UpdateAccount updateAccount;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -73,4 +76,17 @@ public class ViewModelFlyweight {
         return registerAdmin;
     }
 
+    public Accounts getAccounts() {
+        if(accounts == null) accounts = new Accounts(servicesFlyweight.getAccountService());
+        return accounts;
+    }
+
+    public AddAccount getAddAccount(){
+        if(addAccount == null) addAccount = new AddAccount(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService());
+        return addAccount;
+    }
+
+    public UpdateAccount getUpdateAccount(){
+        return new UpdateAccount(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService());
+    }
 }

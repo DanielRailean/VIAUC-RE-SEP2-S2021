@@ -9,6 +9,7 @@ public class ServicesFlyweight {
     private IAdminService adminService;
     private ICurrencyService currencyService;
     private ICategoryService categoryService;
+    private IAccountService accountService;
 
     public ServicesFlyweight(ServerAccessFlyweight serverAccessFlyweight) {
         this.serverAccessFlyweight = serverAccessFlyweight;
@@ -37,5 +38,11 @@ public class ServicesFlyweight {
             categoryService = new CategoryService(serverAccessFlyweight.getCategoryServer());
         }
         return categoryService;
+    }
+    public IAccountService getAccountService() {
+        if(accountService == null){
+            accountService = new AccountService(serverAccessFlyweight.getAccountServer());
+        }
+        return accountService;
     }
 }

@@ -14,27 +14,9 @@ import java.util.List;
 
 public class CurrencyService implements ICurrencyService {
 
-    public boolean nameFree(String name){
-            try (Connection connection = DBAccess.getInstance().getConnection();
-                 PreparedStatement preparedStatement =
-                         connection.prepareStatement("SELECT count(*) as count FROM currencies WHERE name = ?"))
-            {
-                preparedStatement.setString(1, name);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                boolean result = resultSet.getInt("count") == 0;
-                return result;
-            }
-            catch (Exception e)
-            {
-               e.printStackTrace();
-            }
-            return false;
-    }
-
     @Override
     public boolean add(Currency currency) {
         System.out.println("trying to add "+currency);
-        if(!nameFree(currency.getName())) return false;
 
         try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO currencies(name, priceInEur) values(?, ?)"))
         {

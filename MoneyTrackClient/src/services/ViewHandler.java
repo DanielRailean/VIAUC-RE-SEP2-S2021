@@ -3,6 +3,7 @@ package services;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import models.User;
 import mvvm.view.ViewController;
 import mvvm.view.Views;
 import mvvm.view.controllers.MainController;
@@ -29,7 +30,8 @@ public class ViewHandler {
         stage.setMinHeight(700);
         OpenView(Views.Main.name());
         setCenterView(Views.Start.name());
-        setBottomView(Views.BottomBarAdmin.name());
+        setBottomView(Views.BottomBar.name());
+        SessionStorage.setCurrentUser(new User("dd@dd.com","ddddd",1));
     }
 
     public void OpenView(String viewName) {

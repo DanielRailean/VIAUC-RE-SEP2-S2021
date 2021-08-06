@@ -11,25 +11,10 @@ import java.sql.SQLException;
 
 public class AdminService implements IAdminService {
 
-    public boolean emailFree(String email) {
-        try (Connection connection = DBAccess.getInstance().getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM administrators WHERE email  = ?"))
-        {
-            preparedStatement.setString(1, email);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            boolean result = resultSet.getInt("count") == 0;
-            return result;
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException("Failed to execute query.");
-        }
-    }
 
     @Override
     public boolean register(User admin) {
-        System.out.println(admin.getEmail()+" " + admin.getPassword()+" "+ emailFree(admin.getEmail()));
-        if(!emailFree(admin.getEmail())) return false;
-
+        System.out.println(admin.getEmail()+" " + admin.getPassword());
         try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO administrators(email, password) values(?, ?)"))
         {
 

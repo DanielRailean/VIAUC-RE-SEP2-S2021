@@ -11,24 +11,10 @@ import java.sql.SQLException;
 
 public class UserService implements IUserService {
 
-    public boolean emailFree(String email) {
-        try (Connection connection = DBAccess.getInstance().getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM users WHERE email  = ?"))
-        {
-            preparedStatement.setString(1, email);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            boolean result = resultSet.getInt("count") == 0;
-            return result;
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException("Failed to execute query.");
-        }
-    }
 
     @Override
     public boolean register(User user) {
-        System.out.println(user.getEmail()+" " + user.getPassword()+" "+ emailFree(user.getEmail()));
-        if(!emailFree(user.getEmail())) return false;
+        System.out.println(user.getEmail()+" " + user.getPassword());
 
         try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(email, password) values(?, ?)"))
         {
@@ -75,5 +61,19 @@ public class UserService implements IUserService {
     @Override
     public boolean changeEmail(User user, String newEmail) {
         return false;
+    }
+
+    @Override
+    public int getId(String email) {
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?"))
+        {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.getInt("id");
+        }
+        catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return 0;
     }
 }

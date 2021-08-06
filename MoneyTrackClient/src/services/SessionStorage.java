@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class SessionStorage {
     private static SessionStorage sessionStorage;
-    private User currentUser;
+    private static User currentUser;
     private static HashMap<String, Object> items = new HashMap<>();
 
 
@@ -17,12 +17,12 @@ public class SessionStorage {
         return sessionStorage;
     }
 
-    public User getCurrentUser() {
+    public static User getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public static void setCurrentUser(User currentUser) {
+        SessionStorage.currentUser = currentUser;
     }
 
     public static Object getItem(String name){
