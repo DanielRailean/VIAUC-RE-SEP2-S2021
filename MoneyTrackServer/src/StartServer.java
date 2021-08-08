@@ -17,6 +17,7 @@ public class StartServer {
         new CurrencyServer(new CurrencyService(),registry);
         new CategoryServer(new CategoryService(), registry);
         new AccountServer(new AccountService(),userService,registry);
+        new BudgetServer(new BudgetService(),registry);
     }
 
 }
