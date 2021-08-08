@@ -54,6 +54,10 @@ public class ViewHandler {
     }
 
     public void setBottomView(String viewName){
+        if(viewName == null) {
+            mainController.borderPane.setBottom(null);
+            return;
+        }
         viewController = viewControllersFlyweight.getViewController(viewName);
         viewController.init(viewModelFlyweight,this);
         Parent root = viewController.getRoot();

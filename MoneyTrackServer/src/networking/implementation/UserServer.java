@@ -31,4 +31,14 @@ public class UserServer implements IUserServer {
     public User login(User user) throws RemoteException {
         return userService.login(user);
     }
+
+    @Override
+    public boolean changePassword(User user, String newPassword) throws RemoteException {
+        return userService.changePassword(user,newPassword);
+    }
+
+    @Override
+    public boolean changeEmail(User user, String newEmail) throws RemoteException {
+        return userService.changeEmail(user,newEmail);
+    }
 }

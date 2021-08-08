@@ -16,5 +16,8 @@ public enum Views {
     RegisterAdmin,
     Accounts,
     AddAccount,
-    UpdateAccount
+    UpdateAccount,
+    Details,
+    ChangeEmail,
+    ChangePassword
 }

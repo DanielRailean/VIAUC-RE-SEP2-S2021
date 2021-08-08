@@ -29,7 +29,7 @@ public class BottomBarUserController extends ViewController {
 
     }
     public void settings(MouseEvent mouseEvent){
-        System.out.println("settings");
+        viewHandler.setCenterView(Views.Details.name());
 
     }
 }

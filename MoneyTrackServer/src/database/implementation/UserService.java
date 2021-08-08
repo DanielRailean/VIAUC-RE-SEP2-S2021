@@ -33,6 +33,7 @@ public class UserService implements IUserService {
 
     @Override
     public User login(User user) {
+        System.out.println("trying to login "+user);
         System.out.println(user.getEmail()+" " + user.getPassword()+" ");
         String email = null;
         String password = null;
@@ -50,16 +51,42 @@ public class UserService implements IUserService {
             sqlException.printStackTrace();
         }
         if(user.getPassword().equals(password)) return new User(email,password,id);
-        return new User();
+        return null;
     }
 
     @Override
     public boolean changePassword(User user, String newPassword) {
+        System.out.println("trying to update password"+user);
+        User toUpdate = login(user);
+        if (toUpdate == null) return false;
+        try (Connection connection = DBAccess.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update users set password = ? where id = ?"))
+        {
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setInt(2, toUpdate.getId());
+            return preparedStatement.executeUpdate() > 0;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean changeEmail(User user, String newEmail) {
+        System.out.println("trying to update email"+user);
+        User toUpdate = login(user);
+        if (toUpdate == null) return false;
+        try (Connection connection = DBAccess.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update users set email = ? where id = ?"))
+        {
+            preparedStatement.setString(1, newEmail);
+            preparedStatement.setInt(2, toUpdate.getId());
+            return preparedStatement.executeUpdate() > 0;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
