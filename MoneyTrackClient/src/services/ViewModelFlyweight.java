@@ -14,7 +14,9 @@ public class ViewModelFlyweight {
     private RegisterAdmin registerAdmin;
     private Accounts accounts;
     private AddAccount addAccount;
-    private UpdateAccount updateAccount;
+    private Details details;
+    private ChangeEmail changeEmail;
+    private ChangePassword changePassword;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -88,5 +90,24 @@ public class ViewModelFlyweight {
 
     public UpdateAccount getUpdateAccount(){
         return new UpdateAccount(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService());
+    }
+
+    public Details getDetails(){
+        if(details == null) {
+            details = new Details();
+        }
+        return details;
+    }
+    public ChangeEmail getChangeEmail(){
+        if(changeEmail==null){
+            changeEmail = new ChangeEmail(servicesFlyweight.getUserService());
+        }
+        return changeEmail;
+    }
+    public ChangePassword getChangePassword(){
+        if(changePassword==null){
+            changePassword = new ChangePassword(servicesFlyweight.getUserService());
+        }
+        return changePassword;
     }
 }

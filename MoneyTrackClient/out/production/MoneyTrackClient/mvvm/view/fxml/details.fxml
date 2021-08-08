@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="499.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.DetailsController">
+   <children>
+      <Label layoutX="155.0" layoutY="95.0" text="Logout">
+         <font>
+            <Font name="Yu Gothic Light" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="155.0" layoutY="193.0" text="Change Email">
+         <font>
+            <Font name="Yu Gothic Light" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="155.0" layoutY="286.0" text="Change Password">
+         <font>
+            <Font name="Yu Gothic Light" size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="60.0" fitWidth="66.0" layoutX="71.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../favicon_io/arrow-right-from-bracket.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="66.0" layoutX="64.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../favicon_io/circle-envelope.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="66.0" layoutX="64.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../favicon_io/unlock-keyhole.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="290.0" layoutX="41.0" layoutY="156.0" onMouseClicked="#email" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="100.0" fitWidth="223.0" layoutX="41.0" layoutY="58.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="87.0" fitWidth="290.0" layoutX="41.0" layoutY="257.0" onMouseClicked="#password" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="603.0" layoutY="14.0" onMouseClicked="#back" prefHeight="35.0" prefWidth="79.0" text="Back">
+         <font>
+            <Font name="Yu Gothic Light" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

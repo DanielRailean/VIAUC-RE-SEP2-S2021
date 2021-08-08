@@ -7,12 +7,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class UserServer implements IUserServer {
-    private IUserServer registerServer;
+    private IUserServer userServer;
 
     public UserServer() {
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", 4000);
-            this.registerServer = (IUserServer) registry.lookup("UserServer");
+            this.userServer = (IUserServer) registry.lookup("UserServer");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -20,11 +20,21 @@ public class UserServer implements IUserServer {
 
     @Override
     public boolean register(User user) {
-            return registerServer.register(user);
+            return userServer.register(user);
     }
 
     @Override
     public User login(User user) {
-            return registerServer.login(user);
+            return userServer.login(user);
+    }
+
+    @Override
+    public boolean changePassword(User user, String newPassword) {
+        return userServer.changePassword(user,newPassword);
+    }
+
+    @Override
+    public boolean changeEmail(User user, String newEmail) {
+        return userServer.changeEmail(user,newEmail);
     }
 }
