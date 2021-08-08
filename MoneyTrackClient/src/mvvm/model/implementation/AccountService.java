@@ -22,7 +22,7 @@ public class AccountService implements IAccountService {
         if (accountServer.add(account)) {
             return "Account successfully added";
         }
-        return "Unable to add account , most likely , name is already taken !";
+        return "Unable to add account , most likely , you already have an account with the same name !";
     }
 
     @Override
@@ -40,7 +40,7 @@ public class AccountService implements IAccountService {
         if(accountServer.shareWith(accountId,shareWith)){
             return "Account successfully shared";
         }
-        return "Unable to share category, please double-check user email!";
+        return "Unable to share account, please double-check user email!";
     }
 
     @Override

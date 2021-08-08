@@ -85,6 +85,14 @@ public class ValidatorTest {
         assertTrue(Validator.isValidBalance(0));
         assertTrue(Validator.isValidBalance(10000000));
 
+        assertFalse(Validator.isValidBudgetAmount(-1));
+        assertFalse(Validator.isValidBudgetAmount(-10));
+        assertFalse(Validator.isValidBudgetAmount(10000001));
+        assertFalse(Validator.isValidBudgetAmount(100000000));
+        assertTrue(Validator.isValidBudgetAmount(10));
+        assertTrue(Validator.isValidBudgetAmount(0));
+        assertTrue(Validator.isValidBudgetAmount(10000000));
+
         assertFalse(Validator.isValidPriceInEur(-1));
         assertFalse(Validator.isValidPriceInEur(-10));
         assertFalse(Validator.isValidPriceInEur(10000001));

@@ -25,7 +25,7 @@ public class BottomBarUserController extends ViewController {
         viewHandler.setCenterView(Views.Accounts.name());
     }
     public void budgets(MouseEvent mouseEvent){
-        System.out.println("budgets");
+        viewHandler.setCenterView(Views.Budgets.name());
 
     }
     public void settings(MouseEvent mouseEvent){

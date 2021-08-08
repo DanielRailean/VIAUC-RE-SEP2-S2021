@@ -20,5 +20,7 @@ public enum Views {
     Details,
     ChangeEmail,
     ChangePassword,
-    ShareAccount
+    ShareAccount,
+    Budgets,
+    AddBudget
 }

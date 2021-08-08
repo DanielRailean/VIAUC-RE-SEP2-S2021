@@ -4,51 +4,59 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import models.Account;
+import models.Budget;
+import models.Category;
 import models.Currency;
-import mvvm.model.interfaces.IAccountService;
+import mvvm.model.interfaces.IBudgetService;
+import mvvm.model.interfaces.ICategoryService;
 import mvvm.model.interfaces.ICurrencyService;
 import services.SessionStorage;
 
-public class UpdateAccount {
+import java.time.LocalDate;
+
+public class AddBudget {
     private ICurrencyService currencyService;
-    private IAccountService accountService;
+    private IBudgetService budgetService;
+    private ICategoryService categoryService;
 
     private ObservableList<Currency> currencies;
+    private ObservableList<Category> categories;
 
     private StringProperty name;
     private StringProperty error;
-    private StringProperty balance;
+    private StringProperty amount;
 
-    private Account account;
-
-    public UpdateAccount(ICurrencyService currencyService, IAccountService accountService) {
+    public AddBudget(ICurrencyService currencyService, ICategoryService categoryService, IBudgetService budgetService) {
         this.currencyService = currencyService;
-        this.accountService = accountService;
-        account = (Account) SessionStorage.getItem("updatedAccount");
+        this.budgetService = budgetService;
+        this.categoryService = categoryService;
         error = new SimpleStringProperty();
         name = new SimpleStringProperty();
-        balance = new SimpleStringProperty();
-        name.setValue(account.getName());
-        balance.setValue(account.getBalance()+"");
+        amount = new SimpleStringProperty();
         currencies = FXCollections.observableArrayList();
         currencies.addAll(currencyService.getAll());
+        categories = FXCollections.observableArrayList();
+        categories.addAll(categoryService.getAll());
     }
 
-    public String updateAccount(int currencyId){
-        float startBalance;
+    public void addBudget(int categoryId,int currencyId){
+        int amount = 0;
         try{
-            startBalance = Float.parseFloat(balance.getValue());
+            amount = Integer.parseInt(this.amount.getValue());
         }catch (Exception e){
-            error.setValue("Please input a real number!");
-            return "Please input a real number!";
+            error.setValue("Please input a whole number!");
         }
-        account.setBalance(startBalance);
-        account.setName(name.getValue());
-        account.setCurrencyId(currencyId);
-        String result = accountService.update(account);
+        LocalDate now = LocalDate.now();
+        String result = budgetService.add(new Budget(amount,now.getMonthValue(),now.getYear(),categoryId,currencyId,SessionStorage.getCurrentUser().getId()));
         error.setValue(result);
-        return result;
+    }
+
+    public ObservableList<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ObservableList<Category> categories) {
+        this.categories = categories;
     }
 
     public String getError() {
@@ -75,16 +83,16 @@ public class UpdateAccount {
         this.name.set(name);
     }
 
-    public String getBalance() {
-        return balance.get();
+    public String getAmount() {
+        return amount.get();
     }
 
-    public StringProperty balanceProperty() {
-        return balance;
+    public StringProperty amountProperty() {
+        return amount;
     }
 
-    public void setBalance(String balance) {
-        this.balance.set(balance);
+    public void setAmount(String amount) {
+        this.amount.set(amount);
     }
 
     public ObservableList<Currency> getCurrencies() {
@@ -95,16 +103,5 @@ public class UpdateAccount {
 
     public void setCurrencies(ObservableList<Currency> currencies) {
         this.currencies = currencies;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-    public void delete(){
-        accountService.delete(account.getId());
     }
 }

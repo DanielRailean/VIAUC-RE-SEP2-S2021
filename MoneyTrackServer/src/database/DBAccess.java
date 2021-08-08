@@ -90,7 +90,7 @@ public class DBAccess {
         statement.executeUpdate("CREATE TABLE IF NOT EXISTS budgets(id INTEGER PRIMARY KEY AUTOINCREMENT ,amount integer not null, month integer not null,year integer not null, categoryId INTEGER NOT NULL, currencyId INTEGER NOT NULL,ownerId integer not null, FOREIGN KEY(currencyId) REFERENCES currencies(id), FOREIGN KEY(categoryId) REFERENCES categories(id), FOREIGN KEY(ownerId) REFERENCES users(id))");
     }
     private void insertDefaultBudgets(Statement statement) throws SQLException{
-        statement.executeUpdate("INSERT OR IGNORE INTO budgets(amount,month,year,categoryId,currencyId,ownerId) values (1000,8,2021,1,1,1)");
+        statement.executeUpdate("INSERT OR IGNORE INTO budgets(id,amount,month,year,categoryId,currencyId,ownerId) values (1,1000,8,2021,1,1,1)");
     }
     
 }

@@ -11,6 +11,7 @@ public class ServerAccessFlyweight {
     private ICurrencyServer currencyServer;
     private ICategoryServer categoryServer;
     private IAccountServer accountServer;
+    private IBudgetServer budgetServer;
 
 
     public ServerAccessFlyweight() {
@@ -52,6 +53,12 @@ public class ServerAccessFlyweight {
             accountServer = new AccountServer();
         }
         return accountServer;
+    }
+    public IBudgetServer getBudgetServer(){
+        if (budgetServer == null) {
+            budgetServer = new BudgetServer() ;
+        }
+        return budgetServer;
     }
 
 }

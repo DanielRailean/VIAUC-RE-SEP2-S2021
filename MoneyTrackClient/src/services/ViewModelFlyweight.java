@@ -17,6 +17,8 @@ public class ViewModelFlyweight {
     private Details details;
     private ChangeEmail changeEmail;
     private ChangePassword changePassword;
+    private Budgets budgets;
+    private AddBudget addBudget;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -113,5 +115,17 @@ public class ViewModelFlyweight {
 
     public ShareAccount getShareAccount(){
         return new ShareAccount(servicesFlyweight.getAccountService());
+    }
+    public Budgets getBudgets(){
+        if(budgets == null){
+            budgets = new Budgets(servicesFlyweight.getBudgetService());
+        }
+        return budgets;
+    }
+    public AddBudget getAddBudget(){
+        if (addBudget == null) {
+            addBudget = new AddBudget(servicesFlyweight.getCurrencyService(),servicesFlyweight.getCategoryService(),servicesFlyweight.getBudgetService());
+        }
+        return addBudget;
     }
 }

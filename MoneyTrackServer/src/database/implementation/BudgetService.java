@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,8 @@ public class BudgetService implements IBudgetService {
     @Override
     public boolean add(Budget budget) {
         System.out.println("Trying to add "+budget);
-        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("budgets(amount,month,year,categoryId,currencyId,ownerId) values (?,?,?,?,?,?)"))
+        if(!budgetNotExists(budget)) return false;
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("insert into budgets(amount,month,year,categoryId,currencyId,ownerId) values (?,?,?,?,?,?)"))
         {
             preparedStatement.setInt(1, budget.getAmount());
             preparedStatement.setInt(2, budget.getMonth());
@@ -34,6 +36,21 @@ public class BudgetService implements IBudgetService {
         return false;
     }
 
+    public boolean budgetNotExists(Budget budget){
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM budgets WHERE categoryId  = ? and month =? and year = ?"))
+        {
+            preparedStatement.setInt(1, budget.getCategoryId());
+            preparedStatement.setInt(2, budget.getMonth());
+            preparedStatement.setInt(3, budget.getYear());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.getInt("count") == 0;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
     @Override
     public Budget get(int budgetId) {
         int id;
@@ -68,7 +85,7 @@ public class BudgetService implements IBudgetService {
     }
 
     @Override
-    public List<Budget> getBudgets(int userId) {
+    public List<Budget> getBudgets(int userId,LocalDate date) {
         int id;
         int amount;
         int month;
@@ -82,8 +99,10 @@ public class BudgetService implements IBudgetService {
         try
         {
             Connection connection = DBAccess.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM budgets INNER JOIN currencies on budgets.currencyId = currencies.id INNER JOIN categories on budgets.categoryId = categories.id where ownerId = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM budgets INNER JOIN currencies on budgets.currencyId = currencies.id INNER JOIN categories on budgets.categoryId = categories.id where ownerId = ? and month = ? and year =?");
             preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, date.getMonthValue());
+            preparedStatement.setInt(3, date.getYear());
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 id = resultSet.getInt("id");

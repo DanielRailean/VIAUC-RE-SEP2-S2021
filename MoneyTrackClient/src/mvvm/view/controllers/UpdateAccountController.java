@@ -1,9 +1,7 @@
 package mvvm.view.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
 import models.Currency;
@@ -15,6 +13,7 @@ import services.ViewHandler;
 import services.ViewModelFlyweight;
 
 import javax.swing.text.View;
+import java.util.Optional;
 
 public class UpdateAccountController extends ViewController {
     private UpdateAccount updateAccount;
@@ -64,5 +63,18 @@ public class UpdateAccountController extends ViewController {
         SessionStorage.setItem("sharedAccount", updateAccount.getAccount());
         viewHandler.setCenterView(Views.ShareAccount.name());
     }
+    public void delete(MouseEvent mouseEvent){
+        if (showAlert("Confirm Account Delete!", "Are you sure you want to delete your " + updateAccount.getAccount().getName() + " account ? \nWarning! It will also delete any expenses/incomes related to this account!")) {
+            updateAccount.delete();
+            viewHandler.setCenterView(Views.Accounts.name());
+        }
+    }
 
+    public boolean showAlert(String name, String heading){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(name);
+        alert.setHeaderText(heading);
+        Optional<ButtonType> result = alert.showAndWait();
+        return (result.isPresent() && result.get() == ButtonType.OK);
+    }
 }

@@ -9,6 +9,7 @@ import networking.interfaces.IBudgetServer;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDate;
 import java.util.List;
 
 public class BudgetServer implements IBudgetServer {
@@ -38,8 +39,8 @@ public class BudgetServer implements IBudgetServer {
     }
 
     @Override
-    public List<Budget> getBudgets(int userId) throws RemoteException {
-        return budgetService.getBudgets(userId);
+    public List<Budget> getBudgets(int userId, LocalDate date) throws RemoteException {
+        return budgetService.getBudgets(userId,date);
     }
 
 
