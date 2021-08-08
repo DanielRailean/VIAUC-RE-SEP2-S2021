@@ -110,4 +110,8 @@ public class ViewModelFlyweight {
         }
         return changePassword;
     }
+
+    public ShareAccount getShareAccount(){
+        return new ShareAccount(servicesFlyweight.getAccountService());
+    }
 }

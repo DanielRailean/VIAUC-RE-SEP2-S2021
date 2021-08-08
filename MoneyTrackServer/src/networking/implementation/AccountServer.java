@@ -47,7 +47,7 @@ public class AccountServer implements IAccountServer {
     @Override
     public boolean shareWith(int accountId, String shareWith) throws RemoteException {
         int id = userService.getId(shareWith);
-        if(id ==0) return false;
+        if(id == 0) return false;
         return accountService.shareWith(accountId,id);
     }
 

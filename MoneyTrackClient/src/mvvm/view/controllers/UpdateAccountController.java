@@ -10,8 +10,11 @@ import models.Currency;
 import mvvm.view.ViewController;
 import mvvm.view.Views;
 import mvvm.viewModel.UpdateAccount;
+import services.SessionStorage;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
+
+import javax.swing.text.View;
 
 public class UpdateAccountController extends ViewController {
     private UpdateAccount updateAccount;
@@ -57,5 +60,9 @@ public class UpdateAccountController extends ViewController {
         viewHandler.setCenterView(Views.Accounts.name());
     }
 
+    public void share(MouseEvent mouseEvent){
+        SessionStorage.setItem("sharedAccount", updateAccount.getAccount());
+        viewHandler.setCenterView(Views.ShareAccount.name());
+    }
 
 }
