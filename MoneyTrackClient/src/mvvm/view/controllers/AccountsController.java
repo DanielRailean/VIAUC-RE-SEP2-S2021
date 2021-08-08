@@ -52,6 +52,10 @@ public class AccountsController extends ViewController {
         viewHandler.setCenterView(Views.AddAccount.name());
     }
     public void update(MouseEvent mouseEvent){
+        if(SessionStorage.getCurrentUser().getId()!=table.getFocusModel().getFocusedItem().getOwnerId()){
+            error.setText("You cannot update this account it is shared with you , not owned by you!");
+            return;
+        }
         System.out.println("update " + table.getFocusModel().getFocusedItem().getId());
         SessionStorage.setItem("updatedAccount", table.getFocusModel().getFocusedItem());
         viewHandler.setCenterView(Views.UpdateAccount.name());

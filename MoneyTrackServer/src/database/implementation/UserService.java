@@ -96,7 +96,10 @@ public class UserService implements IUserService {
         {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.getInt("id");
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+            return 0;
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();

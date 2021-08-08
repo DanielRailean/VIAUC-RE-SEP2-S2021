@@ -10,14 +10,14 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.AccountsController">
    <children>
-      <TableView fx:id="table" layoutX="32.0" layoutY="100.0" prefHeight="200.0" prefWidth="617.0">
+      <TableView fx:id="table" layoutX="27.0" layoutY="113.0" prefHeight="200.0" prefWidth="617.0">
         <columns>
           <TableColumn fx:id="tableName" prefWidth="274.0" text="Name" />
           <TableColumn fx:id="tableBalance" prefWidth="216.0" text="Balance" />
             <TableColumn fx:id="tableCurrency" prefWidth="126.0" text="Currency" />
         </columns>
       </TableView>
-      <Label layoutY="-4.0" prefHeight="37.0" prefWidth="149.0" text="Accounts">
+      <Label layoutX="11.0" prefHeight="37.0" prefWidth="149.0" text="Accounts">
          <font>
             <Font name="Yu Gothic Light" size="22.0" />
          </font>
@@ -44,7 +44,7 @@
          </image>
       </ImageView>
       <ImageView fitHeight="87.0" fitWidth="243.0" layoutX="390.0" layoutY="313.0" onMouseClicked="#update" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="error" layoutX="390.0" layoutY="43.0" prefHeight="37.0" prefWidth="149.0">
+      <Label fx:id="error" layoutX="9.0" layoutY="37.0" prefHeight="75.0" prefWidth="677.0" wrapText="true">
          <font>
             <Font name="Yu Gothic Light" size="22.0" />
          </font>
