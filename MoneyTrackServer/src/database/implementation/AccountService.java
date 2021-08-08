@@ -2,8 +2,10 @@ package database.implementation;
 
 import database.DBAccess;
 import database.interfaces.IAccountService;
+import database.interfaces.ICurrencyService;
 import models.Account;
 import models.Budget;
+import models.Expense;
 import models.User;
 
 import java.sql.Connection;
@@ -14,7 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountService implements IAccountService {
+    private ICurrencyService currencyService;
 
+    public AccountService(ICurrencyService currencyService) {
+        this.currencyService = currencyService;
+    }
 
     @Override
     public boolean add(Account account) {
@@ -157,6 +163,25 @@ public class AccountService implements IAccountService {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public boolean addExpense(Expense expense) {
+        float expenseInEur = expense.getAmount()*currencyService.get(expense.getCurrencyId()).getPriceInEuro();
+        Account account = get(expense.getAccountId());
+        float expenseInAccountCurrency = expenseInEur/currencyService.get(account.getCurrencyId()).getPriceInEuro();
+        float accountBalance = account.getBalance();
+        account.setBalance(accountBalance-expenseInAccountCurrency);
+        return update(account);
+    }
+    @Override
+    public boolean deleteExpense(Expense expense) {
+        float expenseInEur = expense.getAmount()*currencyService.get(expense.getCurrencyId()).getPriceInEuro();
+        Account account = get(expense.getAccountId());
+        float expenseInAccountCurrency = expenseInEur/currencyService.get(account.getCurrencyId()).getPriceInEuro();
+        float accountBalance = account.getBalance();
+        account.setBalance(accountBalance+expenseInAccountCurrency);
+        return update(account);
     }
 
     @Override
