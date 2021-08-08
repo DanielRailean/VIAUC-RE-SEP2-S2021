@@ -3,6 +3,7 @@ package database.implementation;
 import database.DBAccess;
 import database.interfaces.IAccountService;
 import models.Account;
+import models.Budget;
 import models.User;
 
 import java.sql.Connection;
@@ -14,8 +15,10 @@ import java.util.List;
 
 public class AccountService implements IAccountService {
 
+
     @Override
     public boolean add(Account account) {
+        if(!accountNotExists(account)) return false;
         System.out.println("Trying to add "+account);
         try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO accounts(name,balance,currencyId,ownerId,sharedWith) values (?,?,?,?,?)"))
         {
@@ -102,6 +105,21 @@ public class AccountService implements IAccountService {
         return null;
     }
 
+    public boolean accountNotExists(Account account){
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT count(*) as count FROM accounts WHERE name  = ? and ownerId =?"))
+        {
+            preparedStatement.setString(1, account.getName());
+            preparedStatement.setInt(2, account.getOwnerId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.getInt("count") == 0;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @Override
     public boolean shareWith(int accountId, int shareWith) {
         try (Connection connection = DBAccess.getInstance().getConnection();
@@ -122,6 +140,7 @@ public class AccountService implements IAccountService {
 
     @Override
     public boolean update(Account account) {
+        if(!accountNotExists(account)) return false;
         System.out.println("Trying to update "+account);
         try (Connection connection = DBAccess.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update accounts set name= ?, balance = ? ,currencyId =? where id =?"))

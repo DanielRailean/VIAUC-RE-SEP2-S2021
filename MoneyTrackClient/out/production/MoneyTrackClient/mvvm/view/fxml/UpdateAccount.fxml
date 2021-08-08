@@ -10,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.UpdateAccountController">
    <children>
-      <Label fx:id="errorLabel" layoutX="14.0" layoutY="14.0" prefHeight="103.0" prefWidth="578.0" text="Error" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="errorLabel" layoutX="14.0" layoutY="14.0" prefHeight="103.0" prefWidth="437.0" text="Error" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Yu Gothic Light" size="25.0" />
          </font></Label>
@@ -45,5 +45,16 @@
          </image>
       </ImageView>
       <ImageView fitHeight="53.0" fitWidth="148.0" layoutX="230.0" layoutY="344.0" onMouseClicked="#share" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="517.0" layoutY="51.0" onMouseClicked="#share" text="Delete" textAlignment="CENTER">
+         <font>
+            <Font name="Yu Gothic Light" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="53.0" fitWidth="35.0" layoutX="470.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../favicon_io/trash-can.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="148.0" layoutX="457.0" layoutY="39.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" />
    </children>
 </Pane>

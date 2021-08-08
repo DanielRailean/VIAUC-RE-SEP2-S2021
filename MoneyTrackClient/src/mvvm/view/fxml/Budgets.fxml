@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.BudgetsController">
+   <children>
+      <TableView fx:id="table" layoutX="27.0" layoutY="113.0" prefHeight="200.0" prefWidth="617.0">
+        <columns>
+          <TableColumn fx:id="tableName" prefWidth="274.0" text="Category" />
+          <TableColumn fx:id="tableAmount" prefWidth="216.0" text="Amount" />
+            <TableColumn fx:id="tableCurrency" prefWidth="126.0" text="Currency" />
+        </columns>
+      </TableView>
+      <Label layoutX="11.0" prefHeight="37.0" prefWidth="149.0" text="Budgets">
+         <font>
+            <Font name="Yu Gothic Light" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="213.0" layoutY="340.0" text="Add">
+         <font>
+            <Font name="Yu Gothic Light" size="27.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="68.0" fitWidth="75.0" layoutX="126.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../favicon_io/circle-plus.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="87.0" fitWidth="243.0" layoutX="92.0" layoutY="313.0" onMouseClicked="#add" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="511.0" layoutY="340.0" text="Delete">
+         <font>
+            <Font name="Yu Gothic Light" size="27.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="68.0" fitWidth="75.0" layoutX="424.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../favicon_io/trash-can.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="87.0" fitWidth="243.0" layoutX="390.0" layoutY="313.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="error" layoutX="9.0" layoutY="37.0" prefHeight="75.0" prefWidth="677.0" wrapText="true">
+         <font>
+            <Font name="Yu Gothic Light" size="22.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="datePick" layoutX="470.0" layoutY="62.0" onHiding="#updateTable" />
+   </children>
+</AnchorPane>

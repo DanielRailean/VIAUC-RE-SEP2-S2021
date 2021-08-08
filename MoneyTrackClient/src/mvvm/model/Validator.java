@@ -10,6 +10,7 @@ public class Validator {
     public static final int MAX_INCOME_DESCRIPTION = 50;
     public static final long MAX_EXPENSE = 10000000;
     public static final long MAX_INCOME = 10000000;
+    public static final long MAX_BUDGET = 10000000;
     public static final long MAX_START_BALANCE = 10000000;
     public static final long MAX_PRICE_IN_EUR = 10000000;
     public static final int MAX_CURRENCY_NAME = 10;
@@ -36,6 +37,10 @@ public class Validator {
     };
     public static boolean isValidExpense(float amount){
         return amount>=0&&amount<=MAX_EXPENSE;
+
+    };
+    public static boolean isValidBudgetAmount(float amount){
+        return amount>=0&&amount<=MAX_BUDGET;
 
     };
     public static boolean isValidBalance(float amount){
