@@ -22,5 +22,6 @@ public enum Views {
     ChangePassword,
     ShareAccount,
     Budgets,
-    AddBudget
+    AddBudget,
+    Expenses
 }

@@ -53,7 +53,7 @@ public class AccountService implements IAccountService {
         int sharedWith;
         String sharedEmail;
         String currencyName;
-        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM accounts INNER JOIN currencies on accounts.currencyId = currencies.id INNER JOIN users on accounts.sharedWith = users.id WHERE id = ?"))
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM accounts INNER JOIN currencies on accounts.currencyId = currencies.id INNER JOIN users on accounts.sharedWith = users.id WHERE accounts.id = ?"))
         {
             preparedStatement.setInt(1, accountId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -63,7 +63,7 @@ public class AccountService implements IAccountService {
             ownerId = resultSet.getInt("ownerId");
             currencyId = resultSet.getInt("currencyId");
             sharedWith = resultSet.getInt("sharedWith");
-            currencyName = resultSet.getString("name:1");
+            currencyName = resultSet.getString(8);
             sharedEmail = resultSet.getString("email");
             return new Account(id,name,balance,ownerId,currencyId,sharedWith,currencyName,sharedEmail);
 
@@ -172,7 +172,21 @@ public class AccountService implements IAccountService {
         float expenseInAccountCurrency = expenseInEur/currencyService.get(account.getCurrencyId()).getPriceInEuro();
         float accountBalance = account.getBalance();
         account.setBalance(accountBalance-expenseInAccountCurrency);
-        return update(account);
+        try (Connection connection = DBAccess.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update accounts set name= ?, balance = ? ,currencyId =? where id =?"))
+        {
+
+            preparedStatement.setString(1, account.getName());
+            preparedStatement.setFloat(2, account.getBalance());
+            preparedStatement.setInt(3, account.getCurrencyId());
+            preparedStatement.setInt(4,account.getId());
+
+            return preparedStatement.executeUpdate() > 0;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
     @Override
     public boolean deleteExpense(Expense expense) {
@@ -181,7 +195,21 @@ public class AccountService implements IAccountService {
         float expenseInAccountCurrency = expenseInEur/currencyService.get(account.getCurrencyId()).getPriceInEuro();
         float accountBalance = account.getBalance();
         account.setBalance(accountBalance+expenseInAccountCurrency);
-        return update(account);
+        try (Connection connection = DBAccess.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update accounts set name= ?, balance = ? ,currencyId =? where id =?"))
+        {
+
+            preparedStatement.setString(1, account.getName());
+            preparedStatement.setFloat(2, account.getBalance());
+            preparedStatement.setInt(3, account.getCurrencyId());
+            preparedStatement.setInt(4,account.getId());
+
+            return preparedStatement.executeUpdate() > 0;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

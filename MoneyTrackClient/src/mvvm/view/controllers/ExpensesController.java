@@ -5,31 +5,32 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import models.Budget;
+import models.Expense;
 import mvvm.view.ViewController;
 import mvvm.view.Views;
-import mvvm.viewModel.Budgets;
-import services.SessionStorage;
+import mvvm.viewModel.Expenses;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
 
 import java.util.Optional;
 
 
-public class BudgetsController extends ViewController {
+public class ExpensesController extends ViewController {
     private ViewHandler viewHandler;
-    private Budgets budgetsVM;
+    private Expenses expensesVM;
 
     @FXML
-    private TableView<Budget> table;
+    private TableView<Expense> table;
     @FXML
-    private TableColumn<String , Budget> tableName;
+    private TableColumn<String , Expense> tableDescription;
     @FXML
-    private TableColumn<Float, Budget> tableAmount;
+    private TableColumn<String , Expense> tableAccount;
     @FXML
-    private TableColumn<Float, Budget> tableSpent;
+    private TableColumn<String , Expense> tableName;
     @FXML
-    private TableColumn<String, Budget> tableCurrency;
+    private TableColumn<Float, Expense> tableAmount;
+    @FXML
+    private TableColumn<String, Expense> tableCurrency;
     @FXML
     private Label error;
     @FXML
@@ -39,16 +40,18 @@ public class BudgetsController extends ViewController {
     @Override
     public void init(ViewModelFlyweight viewModelFlyweight, ViewHandler viewHandler) {
         this.viewHandler = viewHandler;
-        this.budgetsVM = viewModelFlyweight.getBudgets();
+        this.expensesVM = viewModelFlyweight.getExpenses();
+        tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tableAccount.setCellValueFactory(new PropertyValueFactory<>("accountName"));
         tableName.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         tableAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        tableSpent.setCellValueFactory(new PropertyValueFactory<>("alreadySpent"));
         tableCurrency.setCellValueFactory(new PropertyValueFactory<>("currencyName"));
-        datePick.valueProperty().bindBidirectional(budgetsVM.localDateProperty());
-        table.setItems(budgetsVM.getBudgets());
-        error.textProperty().bindBidirectional(budgetsVM.errorProperty());
+        datePick.valueProperty().bindBidirectional(expensesVM.localDateProperty());
+        table.setItems(expensesVM.getExpenses());
+        error.textProperty().bindBidirectional(expensesVM.errorProperty());
         table.getSelectionModel().selectFirst();
-        System.out.println(table.getSelectionModel().getSelectedItem());
+        System.out.println(table.getFocusModel().getFocusedItem());
+
     }
     public void back(MouseEvent mouseEvent){
         System.out.println("back");
@@ -57,12 +60,12 @@ public class BudgetsController extends ViewController {
     }
     public void add(MouseEvent mouseEvent){
         System.out.println("add");
-        viewHandler.setCenterView(Views.AddBudget.name());
+//        viewHandler.setCenterView(Views.AddExpense.name());
     }
     public void delete(MouseEvent mouseEvent){
-        if (showAlert("Confirm Delete!", "Are you sure you want to delete your " + table.getFocusModel().getFocusedItem().getCategoryName() + " budget?")) {
-            budgetsVM.delete(table.getFocusModel().getFocusedItem().getId());
-            table.setItems(budgetsVM.getBudgets());
+        if (showAlert("Confirm Delete!", "Are you sure you want to delete your " + table.getFocusModel().getFocusedItem().getCategoryName() + " expense?")) {
+            expensesVM.delete(table.getFocusModel().getFocusedItem().getId());
+            table.setItems(expensesVM.getExpenses());
         }
     }
     public boolean showAlert(String name, String heading){
@@ -74,6 +77,6 @@ public class BudgetsController extends ViewController {
     }
     public void updateTable(Event event){
         System.out.println("event");
-        table.setItems(budgetsVM.getBudgets());
+        table.setItems(expensesVM.getExpenses());
     }
 }

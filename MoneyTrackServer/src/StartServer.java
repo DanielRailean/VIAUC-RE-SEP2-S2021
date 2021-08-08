@@ -1,5 +1,7 @@
 
 import database.implementation.*;
+import database.interfaces.IAccountService;
+import database.interfaces.IBudgetService;
 import database.interfaces.ICurrencyService;
 import database.interfaces.IUserService;
 import networking.implementation.*;
@@ -15,13 +17,15 @@ public class StartServer {
         Registry registry = LocateRegistry.createRegistry(4000);
         IUserService userService = new UserService();
         ICurrencyService currencyService = new CurrencyService();
+        IBudgetService budgetService = new BudgetService(currencyService);
+        IAccountService accountService = new AccountService(currencyService);
         new UserServer(userService, registry);
         new AdminServer(new AdminService(),registry);
         new CurrencyServer(currencyService,registry);
         new CategoryServer(new CategoryService(), registry);
-        new AccountServer(new AccountService(currencyService),userService,registry);
-        new BudgetServer(new BudgetService(currencyService),registry);
-        new ExpenseServer(new ExpenseService(),registry);
+        new AccountServer(accountService,userService,registry);
+        new BudgetServer(budgetService,registry);
+        new ExpenseServer(new ExpenseService(budgetService,accountService),registry);
     }
 
 }

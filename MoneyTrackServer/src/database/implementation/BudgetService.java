@@ -27,7 +27,7 @@ public class BudgetService implements IBudgetService {
     public boolean add(Budget budget) {
         System.out.println("Trying to add "+budget);
         if(!budgetNotExists(budget.getCategoryId(),budget.getMonth(),budget.getYear(),budget.getOwnerId())) return false;
-        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("insert into budgets(amount,alreadySpent,month,year,categoryId,currencyId,ownerId) values (?,?,?,?,?,?)"))
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("insert into budgets(amount,alreadySpent,month,year,categoryId,currencyId,ownerId) values (?,?,?,?,?,?,?)"))
         {
             preparedStatement.setInt(1, budget.getAmount());
             preparedStatement.setFloat(2, budget.getAlreadySpent());
@@ -51,7 +51,7 @@ public class BudgetService implements IBudgetService {
             preparedStatement.setInt(1, category);
             preparedStatement.setInt(2, month);
             preparedStatement.setInt(3, year);
-            preparedStatement.setInt(3, owner);
+            preparedStatement.setInt(4, owner);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.getInt("count") == 0;
         }
@@ -162,7 +162,7 @@ public class BudgetService implements IBudgetService {
                 currencyId = resultSet.getInt("currencyId");
                 ownerId = resultSet.getInt("ownerId");
                 currencyName = resultSet.getString("name");
-                categoryName = resultSet.getString(12);
+                categoryName = resultSet.getString(13);
                 budgets.add(new Budget(id,amount,alreadySpent,month,year,categoryId,currencyId,ownerId,categoryName,currencyName));
             }
             return budgets;
@@ -202,6 +202,7 @@ public class BudgetService implements IBudgetService {
         Budget budget = get(expense.getUserId(),expense.getCategoryId());
         float expenseInBudgetCurrency = expenseInEur/currencyService.get(budget.getCurrencyId()).getPriceInEuro();
         float currentSpent = budget.getAlreadySpent();
+        if(currentSpent<expenseInBudgetCurrency) return true;
         budget.setAlreadySpent(currentSpent-expenseInBudgetCurrency);
         System.out.println("trying to update "+ budget);
         try (Connection connection = DBAccess.getInstance().getConnection();

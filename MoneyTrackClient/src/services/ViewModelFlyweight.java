@@ -19,6 +19,7 @@ public class ViewModelFlyweight {
     private ChangePassword changePassword;
     private Budgets budgets;
     private AddBudget addBudget;
+    private Expenses expenses;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -127,5 +128,12 @@ public class ViewModelFlyweight {
             addBudget = new AddBudget(servicesFlyweight.getCurrencyService(),servicesFlyweight.getCategoryService(),servicesFlyweight.getBudgetService());
         }
         return addBudget;
+    }
+
+    public Expenses getExpenses(){
+        if (expenses == null) {
+            expenses = new Expenses(servicesFlyweight.getExpenseService());
+        }
+        return expenses;
     }
 }

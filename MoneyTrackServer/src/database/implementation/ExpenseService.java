@@ -17,6 +17,12 @@ public class ExpenseService implements IExpenseService {
 
     private IBudgetService budgetService;
     private IAccountService accountService;
+
+    public ExpenseService(IBudgetService budgetService, IAccountService accountService) {
+        this.budgetService = budgetService;
+        this.accountService = accountService;
+    }
+
     @Override
     public boolean add(Expense expense) {
         boolean addExpense;
@@ -63,7 +69,7 @@ public class ExpenseService implements IExpenseService {
         String categoryName;
         String currencyName;
         try (Connection connection = DBAccess.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM expenses INNER JOIN currencies on expenses.currencyId = currencies.id INNER JOIN categories on expenses.categoryId = categories.id WHERE id = ?"))
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM expenses INNER JOIN currencies on expenses.currencyId = currencies.id INNER JOIN categories on expenses.categoryId = categories.id inner join accounts on expenses.accountId = accounts.id WHERE expenses.id = ?"))
         {
             preparedStatement.setInt(1, expenseId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -78,9 +84,9 @@ public class ExpenseService implements IExpenseService {
             currencyId = resultSet.getInt("currencyId");
             ownerId = resultSet.getInt("userId");
             accountName = resultSet.getString(17);
-            currencyName = resultSet.getString("name");
+            currencyName = resultSet.getString(12);
             categoryName = resultSet.getString(15);
-            return new Expense(id,amount,description,day,month,year,accountId,categoryId,currencyId,ownerId,accountName,categoryName,currencyName);
+            return new Expense(id,amount,description,day,month,year,accountId,categoryId,currencyId,ownerId,accountName,currencyName,categoryName);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -125,9 +131,9 @@ public class ExpenseService implements IExpenseService {
                 currencyId = resultSet.getInt("currencyId");
                 ownerId = resultSet.getInt("userId");
                 accountName = resultSet.getString(17);
-                currencyName = resultSet.getString("name");
+                currencyName = resultSet.getString(12);
                 categoryName = resultSet.getString(15);
-                expenses.add(new Expense(id,amount,description,day,month,year,accountId,categoryId,currencyId,ownerId,accountName,categoryName,currencyName));
+                expenses.add(new Expense(id,amount,description,day,month,year,accountId,categoryId,currencyId,ownerId,accountName,currencyName,categoryName));
             }
             return expenses;
         }
@@ -172,9 +178,9 @@ public class ExpenseService implements IExpenseService {
                 currencyId = resultSet.getInt("currencyId");
                 ownerId = resultSet.getInt("userId");
                 accountName = resultSet.getString(17);
-                currencyName = resultSet.getString("name");
+                currencyName = resultSet.getString(12);
                 categoryName = resultSet.getString(15);
-                expenses.add(new Expense(id,amount,description,day,month,year,accountId,categoryId,currencyId,ownerId,accountName,categoryName,currencyName));
+                expenses.add(new Expense(id,amount,description,day,month,year,accountId,categoryId,currencyId,ownerId,accountName,currencyName,categoryName));
             }
             return expenses;
         }
@@ -186,18 +192,18 @@ public class ExpenseService implements IExpenseService {
 
     @Override
     public boolean delete(int expenseId) {
-        boolean deleteExpense;
-        boolean updateBudget;
-        boolean updateAccount;
+        boolean deleteExpense = false;
+        boolean updateBudget = false;
+        boolean updateAccount = false;
         Expense expense = get(expenseId);
+        System.out.println(expense);
         try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("delete FROM expenses WHERE id = ?"))
         {
+            updateAccount = accountService.deleteExpense(expense);
+            updateBudget = budgetService.deleteExpense(expense);
             preparedStatement.setInt(1, expenseId);
             deleteExpense =  preparedStatement.executeUpdate() > 0;
-            updateBudget = budgetService.deleteExpense(expense);
-            updateAccount = accountService.deleteExpense(expense);
             return deleteExpense&&updateAccount&&updateBudget;
-
         }
         catch (Exception e) {
             e.printStackTrace();
