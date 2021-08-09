@@ -51,6 +51,7 @@ public class ExpensesController extends ViewController {
         error.textProperty().bindBidirectional(expensesVM.errorProperty());
         table.getSelectionModel().selectFirst();
         System.out.println(table.getFocusModel().getFocusedItem());
+        error.textProperty().setValue("");
 
     }
     public void back(MouseEvent mouseEvent){
@@ -60,7 +61,7 @@ public class ExpensesController extends ViewController {
     }
     public void add(MouseEvent mouseEvent){
         System.out.println("add");
-//        viewHandler.setCenterView(Views.AddExpense.name());
+        viewHandler.setCenterView(Views.AddExpense.name());
     }
     public void delete(MouseEvent mouseEvent){
         if (showAlert("Confirm Delete!", "Are you sure you want to delete your " + table.getFocusModel().getFocusedItem().getCategoryName() + " expense?")) {

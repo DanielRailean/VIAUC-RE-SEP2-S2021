@@ -59,7 +59,7 @@ public class AddBudgetController extends ViewController {
         });
         currencies.getSelectionModel().selectFirst();
         categories.getSelectionModel().selectFirst();
-        errorLabel.textProperty().setValue("Select a budget & currency and type in the amount");
+        errorLabel.textProperty().setValue("Select a category and currency and type in the amount");
     }
 
     public void add(MouseEvent mouseEvent){

@@ -23,5 +23,6 @@ public enum Views {
     ShareAccount,
     Budgets,
     AddBudget,
-    Expenses
+    Expenses,
+    AddExpense
 }

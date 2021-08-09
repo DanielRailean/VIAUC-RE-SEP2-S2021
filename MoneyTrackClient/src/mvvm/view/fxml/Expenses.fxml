@@ -20,7 +20,7 @@
             <TableColumn fx:id="tableCurrency" prefWidth="92.0" text="Currency" />
         </columns>
       </TableView>
-      <Label layoutX="11.0" prefHeight="37.0" prefWidth="149.0" text="Budgets">
+      <Label layoutX="11.0" prefHeight="37.0" prefWidth="149.0" text="Expenses">
          <font>
             <Font name="Yu Gothic Light" size="22.0" />
          </font>

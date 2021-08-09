@@ -146,7 +146,6 @@ public class AccountService implements IAccountService {
 
     @Override
     public boolean update(Account account) {
-        if(!accountNotExists(account)) return false;
         System.out.println("Trying to update "+account);
         try (Connection connection = DBAccess.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update accounts set name= ?, balance = ? ,currencyId =? where id =?"))

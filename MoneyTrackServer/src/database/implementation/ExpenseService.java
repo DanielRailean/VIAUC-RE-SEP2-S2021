@@ -30,9 +30,9 @@ public class ExpenseService implements IExpenseService {
         boolean updateAccount;
         System.out.println("Trying to add "+expense);
         try (Connection connection = DBAccess.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into expenses(amount,description,day,month,year,accountId,categoryId,currencyId,userId) values (?,?,?,?,?,?,?,?,?,?)"))
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into expenses(amount,description,day,month,year,accountId,categoryId,currencyId,userId) values (?,?,?,?,?,?,?,?,?)"))
         {
-            preparedStatement.setInt(1, expense.getAmount());
+            preparedStatement.setFloat(1, expense.getAmount());
             preparedStatement.setString(2, expense.getDescription());
             preparedStatement.setInt(3, expense.getDay());
             preparedStatement.setInt(4, expense.getMonth());
@@ -45,18 +45,16 @@ public class ExpenseService implements IExpenseService {
             updateAccount = accountService.addExpense(expense);
             updateBudget = budgetService.addExpense(expense);
             return addExpense&&updateAccount&&updateBudget;
-
         }
         catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-
     }
     @Override
     public Expense get(int expenseId) {
         int id;
-        int amount;
+        float amount;
         String description;
         int day;
         int month;
@@ -74,7 +72,7 @@ public class ExpenseService implements IExpenseService {
             preparedStatement.setInt(1, expenseId);
             ResultSet resultSet = preparedStatement.executeQuery();
             id = resultSet.getInt("id");
-            amount = resultSet.getInt("amount");
+            amount = resultSet.getFloat("amount");
             description = resultSet.getString("description");
             day = resultSet.getInt("day");
             month = resultSet.getInt("month");
@@ -97,7 +95,7 @@ public class ExpenseService implements IExpenseService {
     @Override
     public List<Expense> getExpensesDay(int userId,LocalDate date) {
         int id;
-        int amount;
+        float amount;
         String description;
         int day;
         int month;
@@ -121,7 +119,7 @@ public class ExpenseService implements IExpenseService {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 id = resultSet.getInt("id");
-                amount = resultSet.getInt("amount");
+                amount = resultSet.getFloat("amount");
                 description = resultSet.getString("description");
                 day = resultSet.getInt("day");
                 month = resultSet.getInt("month");
@@ -145,7 +143,7 @@ public class ExpenseService implements IExpenseService {
     @Override
     public List<Expense> getExpensesMonth(int userId,LocalDate date) {
         int id;
-        int amount;
+        float amount;
         String description;
         int day;
         int month;
@@ -168,7 +166,7 @@ public class ExpenseService implements IExpenseService {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 id = resultSet.getInt("id");
-                amount = resultSet.getInt("amount");
+                amount = resultSet.getFloat("amount");
                 description = resultSet.getString("description");
                 day = resultSet.getInt("day");
                 month = resultSet.getInt("month");

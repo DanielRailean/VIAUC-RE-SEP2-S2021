@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Expense implements Serializable {
     private int id;
-    private int amount;
+    private float amount;
     private String description;
     private int day;
     private int month;
@@ -17,19 +17,7 @@ public class Expense implements Serializable {
     private String currencyName;
     private String categoryName;
 
-    public Expense(int amount, String description, int day, int month, int year, int accountId, int currencyId, int categoryId, int userId) {
-        this.amount = amount;
-        this.description = description;
-        this.day = day;
-        this.month = month;
-        this.year = year;
-        this.accountId = accountId;
-        this.currencyId = currencyId;
-        this.categoryId = categoryId;
-        this.userId = userId;
-    }
-
-    public Expense(int id, int amount, String description, int day, int month, int year, int accountId, int currencyId, int categoryId, int userId, String accountName, String currencyName, String categoryName) {
+    public Expense(int id, float amount, String description, int day, int month, int year, int accountId, int categoryId, int currencyId, int userId, String accountName, String currencyName, String categoryName) {
         this.id = id;
         this.amount = amount;
         this.description = description;
@@ -45,20 +33,32 @@ public class Expense implements Serializable {
         this.categoryName = categoryName;
     }
 
+    public Expense(float amount, String description, int day, int month, int year, int accountId, int currencyId, int categoryId, int userId) {
+        this.amount = amount;
+        this.description = description;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.accountId = accountId;
+        this.currencyId = currencyId;
+        this.categoryId = categoryId;
+        this.userId = userId;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public String getDescription() {
