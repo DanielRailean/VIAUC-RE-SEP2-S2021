@@ -2,8 +2,10 @@ package database.implementation;
 
 import database.DBAccess;
 import database.interfaces.IAccountService;
+import database.interfaces.ICurrencyService;
 import models.Account;
 import models.Budget;
+import models.Expense;
 import models.User;
 
 import java.sql.Connection;
@@ -14,7 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountService implements IAccountService {
+    private ICurrencyService currencyService;
 
+    public AccountService(ICurrencyService currencyService) {
+        this.currencyService = currencyService;
+    }
 
     @Override
     public boolean add(Account account) {
@@ -47,7 +53,7 @@ public class AccountService implements IAccountService {
         int sharedWith;
         String sharedEmail;
         String currencyName;
-        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM accounts INNER JOIN currencies on accounts.currencyId = currencies.id INNER JOIN users on accounts.sharedWith = users.id WHERE id = ?"))
+        try (Connection connection = DBAccess.getInstance().getConnection();PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM accounts INNER JOIN currencies on accounts.currencyId = currencies.id INNER JOIN users on accounts.sharedWith = users.id WHERE accounts.id = ?"))
         {
             preparedStatement.setInt(1, accountId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -57,7 +63,7 @@ public class AccountService implements IAccountService {
             ownerId = resultSet.getInt("ownerId");
             currencyId = resultSet.getInt("currencyId");
             sharedWith = resultSet.getInt("sharedWith");
-            currencyName = resultSet.getString("name:1");
+            currencyName = resultSet.getString(8);
             sharedEmail = resultSet.getString("email");
             return new Account(id,name,balance,ownerId,currencyId,sharedWith,currencyName,sharedEmail);
 
@@ -140,8 +146,54 @@ public class AccountService implements IAccountService {
 
     @Override
     public boolean update(Account account) {
-        if(!accountNotExists(account)) return false;
         System.out.println("Trying to update "+account);
+        try (Connection connection = DBAccess.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update accounts set name= ?, balance = ? ,currencyId =? where id =?"))
+        {
+
+            preparedStatement.setString(1, account.getName());
+            preparedStatement.setFloat(2, account.getBalance());
+            preparedStatement.setInt(3, account.getCurrencyId());
+            preparedStatement.setInt(4,account.getId());
+
+            return preparedStatement.executeUpdate() > 0;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addExpense(Expense expense) {
+        float expenseInEur = expense.getAmount()*currencyService.get(expense.getCurrencyId()).getPriceInEuro();
+        Account account = get(expense.getAccountId());
+        float expenseInAccountCurrency = expenseInEur/currencyService.get(account.getCurrencyId()).getPriceInEuro();
+        float accountBalance = account.getBalance();
+        account.setBalance(accountBalance-expenseInAccountCurrency);
+        try (Connection connection = DBAccess.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update accounts set name= ?, balance = ? ,currencyId =? where id =?"))
+        {
+
+            preparedStatement.setString(1, account.getName());
+            preparedStatement.setFloat(2, account.getBalance());
+            preparedStatement.setInt(3, account.getCurrencyId());
+            preparedStatement.setInt(4,account.getId());
+
+            return preparedStatement.executeUpdate() > 0;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    @Override
+    public boolean deleteExpense(Expense expense) {
+        float expenseInEur = expense.getAmount()*currencyService.get(expense.getCurrencyId()).getPriceInEuro();
+        Account account = get(expense.getAccountId());
+        float expenseInAccountCurrency = expenseInEur/currencyService.get(account.getCurrencyId()).getPriceInEuro();
+        float accountBalance = account.getBalance();
+        account.setBalance(accountBalance+expenseInAccountCurrency);
         try (Connection connection = DBAccess.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update accounts set name= ?, balance = ? ,currencyId =? where id =?"))
         {

@@ -9,17 +9,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.BudgetsController">
+<AnchorPane prefHeight="400.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.ExpensesController">
    <children>
       <TableView fx:id="table" layoutX="27.0" layoutY="113.0" prefHeight="200.0" prefWidth="617.0">
         <columns>
-          <TableColumn fx:id="tableName" prefWidth="222.0" text="Category" />
-          <TableColumn fx:id="tableAmount" prefWidth="144.0" text="Amount" />
-            <TableColumn fx:id="tableSpent" prefWidth="133.0" text="Spent" />
-            <TableColumn fx:id="tableCurrency" prefWidth="132.0" text="Currency" />
+            <TableColumn fx:id="tableDescription" prefWidth="163.0" text="Description" />
+          <TableColumn fx:id="tableName" prefWidth="133.0" text="Category" />
+            <TableColumn fx:id="tableAccount" prefWidth="123.0" text="Account" />
+          <TableColumn fx:id="tableAmount" prefWidth="105.0" text="Amount" />
+            <TableColumn fx:id="tableCurrency" prefWidth="92.0" text="Currency" />
         </columns>
       </TableView>
-      <Label layoutX="11.0" prefHeight="37.0" prefWidth="149.0" text="Budgets">
+      <Label layoutX="11.0" prefHeight="37.0" prefWidth="149.0" text="Expenses">
          <font>
             <Font name="Yu Gothic Light" size="22.0" />
          </font>
