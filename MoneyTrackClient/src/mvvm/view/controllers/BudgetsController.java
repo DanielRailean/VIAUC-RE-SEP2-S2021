@@ -48,7 +48,8 @@ public class BudgetsController extends ViewController {
         table.setItems(budgetsVM.getBudgets());
         error.textProperty().bindBidirectional(budgetsVM.errorProperty());
         table.getSelectionModel().selectFirst();
-        System.out.println(table.getSelectionModel().getSelectedItem());
+        error.textProperty().setValue("Showing budgets for "+ theMonth(budgetsVM.getLocalDate().getMonthValue()) +" of "+ budgetsVM.getLocalDate().getYear());
+
     }
     public void back(MouseEvent mouseEvent){
         System.out.println("back");
@@ -73,7 +74,12 @@ public class BudgetsController extends ViewController {
         return (result.isPresent() && result.get() == ButtonType.OK);
     }
     public void updateTable(Event event){
-        System.out.println("event");
+        error.textProperty().setValue("Showing budgets for "+ theMonth(budgetsVM.getLocalDate().getMonthValue()) +" of "+ budgetsVM.getLocalDate().getYear());
         table.setItems(budgetsVM.getBudgets());
+    }
+    public String theMonth(int month){
+        month -=1;
+        String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return monthNames[month];
     }
 }
