@@ -52,6 +52,8 @@ public class DBAccess {
             insertDefaultBudgets(statement);
             createExpensesTable(statement);
             insertDefaultExpenses(statement);
+            createIncomesTable(statement);
+            insertDefaultIncomes(statement);
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -99,6 +101,12 @@ public class DBAccess {
     }
     private void insertDefaultExpenses(Statement statement) throws SQLException{
         statement.executeUpdate("INSERT OR IGNORE INTO expenses(id,amount,description,day,month,year,accountId,categoryId,currencyId,userId) values (1,1000,'Bilka food',8,8,2021,1,1,1,1)");
+    }
+    private void createIncomesTable(Statement statement) throws SQLException {
+        statement.executeUpdate("CREATE TABLE IF NOT EXISTS incomes(id INTEGER PRIMARY KEY AUTOINCREMENT ,amount real not null,description varchar(50) not null,day integer not null, month integer not null,year integer not null,accountId INTEGER NOT NULL, currencyId INTEGER NOT NULL,userId integer not null, FOREIGN KEY(currencyId) REFERENCES currencies(id), FOREIGN KEY(userId) REFERENCES users(id), FOREIGN KEY(accountId) REFERENCES accounts(id))");
+    }
+    private void insertDefaultIncomes(Statement statement) throws SQLException{
+        statement.executeUpdate("INSERT OR IGNORE INTO incomes(id,amount,description,day,month,year,accountId,currencyId,userId) values (1,1000,'Rema lon',8,8,2021,1,1,1)");
     }
     
 }

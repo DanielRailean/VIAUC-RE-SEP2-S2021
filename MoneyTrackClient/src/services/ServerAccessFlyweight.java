@@ -13,6 +13,7 @@ public class ServerAccessFlyweight {
     private IAccountServer accountServer;
     private IBudgetServer budgetServer;
     private IExpenseServer expenseServer;
+    private IIncomeServer incomeServer;
 
 
     public ServerAccessFlyweight() {
@@ -66,6 +67,12 @@ public class ServerAccessFlyweight {
             expenseServer = new ExpenseServer();
         }
         return expenseServer;
+    }
+    public IIncomeServer getIncomeServer(){
+        if (incomeServer == null) {
+            incomeServer = new IncomeServer();
+        }
+        return incomeServer;
     }
 
 }

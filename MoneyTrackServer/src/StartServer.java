@@ -26,6 +26,7 @@ public class StartServer {
         new AccountServer(accountService,userService,registry);
         new BudgetServer(budgetService,registry);
         new ExpenseServer(new ExpenseService(budgetService,accountService),registry);
+        new IncomeServer(new IncomeService(accountService),registry);
     }
 
 }

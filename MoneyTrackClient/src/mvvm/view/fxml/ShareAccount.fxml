@@ -16,7 +16,7 @@
             <Font name="Yu Gothic Light" size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="name" editable="false" layoutX="157.0" layoutY="168.0" prefHeight="53.0" prefWidth="287.0" promptText="account name">
+      <TextField fx:id="name" disable="true" editable="false" layoutX="157.0" layoutY="168.0" prefHeight="53.0" prefWidth="287.0" promptText="account name">
          <font>
             <Font name="Yu Gothic Light" size="21.0" />
          </font></TextField>

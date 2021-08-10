@@ -51,6 +51,7 @@ public class ExpensesController extends ViewController {
         error.textProperty().bindBidirectional(expensesVM.errorProperty());
         table.getSelectionModel().selectFirst();
         System.out.println(table.getFocusModel().getFocusedItem());
+        error.textProperty().setValue("Showing expenses for "+ theMonth(expensesVM.getLocalDate().getMonthValue()) +" of "+ expensesVM.getLocalDate().getYear());
         error.textProperty().setValue("");
 
     }
@@ -78,6 +79,13 @@ public class ExpensesController extends ViewController {
     }
     public void updateTable(Event event){
         System.out.println("event");
+        error.textProperty().setValue("Showing expenses for "+ theMonth(expensesVM.getLocalDate().getMonthValue()) +" of "+ expensesVM.getLocalDate().getYear());
         table.setItems(expensesVM.getExpenses());
+    }
+
+    public String theMonth(int month){
+        month -=1;
+        String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return monthNames[month];
     }
 }
