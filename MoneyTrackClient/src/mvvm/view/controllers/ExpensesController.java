@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.StringConverter;
 import models.Expense;
 import mvvm.view.ViewController;
 import mvvm.view.Views;
@@ -12,6 +13,7 @@ import mvvm.viewModel.Expenses;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 
@@ -47,6 +49,17 @@ public class ExpensesController extends ViewController {
         tableAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         tableCurrency.setCellValueFactory(new PropertyValueFactory<>("currencyName"));
         datePick.valueProperty().bindBidirectional(expensesVM.localDateProperty());
+        datePick.setConverter(new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                return theMonth(date.getMonthValue()) + " of " + date.getYear();
+            }
+
+            @Override
+            public LocalDate fromString(String s) {
+                return null;
+            }
+        });
         table.setItems(expensesVM.getExpenses());
         error.textProperty().bindBidirectional(expensesVM.errorProperty());
         table.getSelectionModel().selectFirst();

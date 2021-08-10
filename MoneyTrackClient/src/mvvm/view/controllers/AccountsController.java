@@ -1,5 +1,6 @@
 package mvvm.view.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,6 +13,7 @@ import services.SessionStorage;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
 
+import java.util.List;
 import java.util.Optional;
 
 

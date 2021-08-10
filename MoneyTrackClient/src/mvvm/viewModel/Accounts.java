@@ -8,6 +8,8 @@ import models.Account;
 import mvvm.model.interfaces.IAccountService;
 import services.SessionStorage;
 
+import java.util.List;
+
 public class Accounts {
     private IAccountService accountService;
 
@@ -17,8 +19,6 @@ public class Accounts {
     public Accounts(IAccountService accountService) {
         this.accountService = accountService;
         error = new SimpleStringProperty();
-        accounts = FXCollections.observableArrayList();
-        accounts.addAll(accountService.getAccounts(SessionStorage.getCurrentUser().getId()));
     }
 
     public String getError() {
@@ -34,8 +34,21 @@ public class Accounts {
     }
 
     public ObservableList<Account> getAccounts() {
+        List<Account> accountIList = accountService.getAccounts(SessionStorage.getCurrentUser().getId());
+        int userId = SessionStorage.getCurrentUser().getId();
+        for (int i=0;i<accountIList.size();i++) {
+            Account account = accountIList.get(i);
+            if (account.getOwnerId() != userId ) {
+                account.setName(account.getName()+" (shared with you)");
+            }
+            if (account.getSharedWith() != userId ) {
+                account.setName(account.getName()+" (shared by you)");
+            }
+            accountIList.set(i,account);
+            System.out.println(account);
+        }
         accounts = FXCollections.observableArrayList();
-        accounts.addAll(accountService.getAccounts(SessionStorage.getCurrentUser().getId()));
+        accounts.addAll(accountIList);
         return accounts;
     }
 

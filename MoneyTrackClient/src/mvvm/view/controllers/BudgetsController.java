@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.StringConverter;
 import models.Budget;
 import mvvm.view.ViewController;
 import mvvm.view.Views;
@@ -13,6 +14,7 @@ import services.SessionStorage;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 
@@ -49,7 +51,17 @@ public class BudgetsController extends ViewController {
         error.textProperty().bindBidirectional(budgetsVM.errorProperty());
         table.getSelectionModel().selectFirst();
         error.textProperty().setValue("Showing budgets for "+ theMonth(budgetsVM.getLocalDate().getMonthValue()) +" of "+ budgetsVM.getLocalDate().getYear());
+        datePick.setConverter(new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                return theMonth(date.getMonthValue()) + " of " + date.getYear();
+            }
 
+            @Override
+            public LocalDate fromString(String s) {
+                return null;
+            }
+        });
     }
     public void back(MouseEvent mouseEvent){
         System.out.println("back");

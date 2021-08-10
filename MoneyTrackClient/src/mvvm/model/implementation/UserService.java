@@ -59,7 +59,6 @@ public class UserService implements IUserService {
     public String changeEmail(User user, String newEmail) {
         boolean result;
         if(Validator.isValidAdminEmail(user.getEmail())) return "Not for admin uses!";
-        if(!Validator.isValidEmail(user.getEmail())) return "Old email invalid!";
         if(!Validator.isValidEmail(newEmail)) return "New email invalid!";
         if(!Validator.isValidPassword(user.getPassword())) return "Password should contain 5-30 characters";
         result = userServer.changeEmail(user,newEmail);

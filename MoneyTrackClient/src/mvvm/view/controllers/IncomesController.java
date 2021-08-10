@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.StringConverter;
 import models.Income;
 import mvvm.view.ViewController;
 import mvvm.view.Views;
@@ -12,6 +13,7 @@ import mvvm.viewModel.Incomes;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 
@@ -49,7 +51,17 @@ public class IncomesController extends ViewController {
         table.getSelectionModel().selectFirst();
         System.out.println(table.getFocusModel().getFocusedItem());
         error.textProperty().setValue("Showing incomes for "+ theMonth(incomesVM.getLocalDate().getMonthValue()) +" of "+ incomesVM.getLocalDate().getYear());
+        datePick.setConverter(new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate date) {
+                return theMonth(date.getMonthValue()) + " of " + date.getYear();
+            }
 
+            @Override
+            public LocalDate fromString(String s) {
+                return null;
+            }
+        });
     }
     public void back(MouseEvent mouseEvent){
         System.out.println("back");
