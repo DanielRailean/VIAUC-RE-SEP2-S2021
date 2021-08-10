@@ -127,7 +127,7 @@ public class Income implements Serializable {
     public void setCurrencyName(String currencyName) {
         this.currencyName = currencyName;
     }
-    
+
 
     @Override
     public String toString() {

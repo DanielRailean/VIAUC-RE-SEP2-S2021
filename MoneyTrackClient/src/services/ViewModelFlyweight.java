@@ -21,6 +21,8 @@ public class ViewModelFlyweight {
     private AddBudget addBudget;
     private Expenses expenses;
     private AddExpense addExpense;
+    private Incomes incomes;
+    private AddIncome addIncome;
 
     public ViewModelFlyweight(ServicesFlyweight servicesFlyweight) {
         this.servicesFlyweight = servicesFlyweight;
@@ -143,5 +145,18 @@ public class ViewModelFlyweight {
             addExpense = new AddExpense(servicesFlyweight.getCurrencyService(),servicesFlyweight.getBudgetService(),servicesFlyweight.getAccountService(),servicesFlyweight.getExpenseService());
         }
         return addExpense;
+    }
+    public Incomes getIncomes(){
+        if (incomes == null) {
+            incomes = new Incomes(servicesFlyweight.getIncomeService());
+        }
+        return incomes;
+    }
+
+    public AddIncome getAddIncome(){
+        if (addIncome == null) {
+            addIncome = new AddIncome(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService(),servicesFlyweight.getIncomeService());
+        }
+        return addIncome;
     }
 }

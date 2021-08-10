@@ -24,5 +24,7 @@ public enum Views {
     Budgets,
     AddBudget,
     Expenses,
-    AddExpense
+    AddExpense,
+    Incomes,
+    AddIncome
 }

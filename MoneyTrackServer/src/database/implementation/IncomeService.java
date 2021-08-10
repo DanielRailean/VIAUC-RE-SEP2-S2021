@@ -100,7 +100,7 @@ public class IncomeService implements IIncomeService {
         try
         {
             Connection connection = DBAccess.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM incomes INNER JOIN currencies on incomes.currencyId = currencies.id INNER JOIN categories on incomes.categoryId = categories.id inner join accounts on incomes.accountId = accounts.id where userId = ? and month = ? and year = ? and day =? ");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM incomes INNER JOIN currencies on incomes.currencyId = currencies.id inner join accounts on incomes.accountId = accounts.id where userId = ? and month = ? and year = ? and day =? ");
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, date.getMonthValue());
             preparedStatement.setInt(3, date.getYear());
@@ -144,7 +144,7 @@ public class IncomeService implements IIncomeService {
         try
         {
             Connection connection = DBAccess.getInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM incomes INNER JOIN currencies on incomes.currencyId = currencies.id INNER JOIN categories on incomes.categoryId = categories.id inner join accounts on incomes.accountId = accounts.id where userId = ? and month = ? and year = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM incomes INNER JOIN currencies on incomes.currencyId = currencies.id inner join accounts on incomes.accountId = accounts.id where userId = ? and month = ? and year = ?");
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, date.getMonthValue());
             preparedStatement.setInt(3, date.getYear());

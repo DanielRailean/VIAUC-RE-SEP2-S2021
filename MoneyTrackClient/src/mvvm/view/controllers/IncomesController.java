@@ -5,32 +5,30 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import models.Expense;
+import models.Income;
 import mvvm.view.ViewController;
 import mvvm.view.Views;
-import mvvm.viewModel.Expenses;
+import mvvm.viewModel.Incomes;
 import services.ViewHandler;
 import services.ViewModelFlyweight;
 
 import java.util.Optional;
 
 
-public class ExpensesController extends ViewController {
+public class IncomesController extends ViewController {
     private ViewHandler viewHandler;
-    private Expenses expensesVM;
+    private Incomes incomesVM;
 
     @FXML
-    private TableView<Expense> table;
+    private TableView<Income> table;
     @FXML
-    private TableColumn<String , Expense> tableDescription;
+    private TableColumn<String , Income> tableDescription;
     @FXML
-    private TableColumn<String , Expense> tableAccount;
+    private TableColumn<String , Income> tableAccount;
     @FXML
-    private TableColumn<String , Expense> tableName;
+    private TableColumn<Float, Income> tableAmount;
     @FXML
-    private TableColumn<Float, Expense> tableAmount;
-    @FXML
-    private TableColumn<String, Expense> tableCurrency;
+    private TableColumn<String, Income> tableCurrency;
     @FXML
     private Label error;
     @FXML
@@ -40,18 +38,17 @@ public class ExpensesController extends ViewController {
     @Override
     public void init(ViewModelFlyweight viewModelFlyweight, ViewHandler viewHandler) {
         this.viewHandler = viewHandler;
-        this.expensesVM = viewModelFlyweight.getExpenses();
+        this.incomesVM = viewModelFlyweight.getIncomes();
         tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         tableAccount.setCellValueFactory(new PropertyValueFactory<>("accountName"));
-        tableName.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         tableAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         tableCurrency.setCellValueFactory(new PropertyValueFactory<>("currencyName"));
-        datePick.valueProperty().bindBidirectional(expensesVM.localDateProperty());
-        table.setItems(expensesVM.getExpenses());
-        error.textProperty().bindBidirectional(expensesVM.errorProperty());
+        datePick.valueProperty().bindBidirectional(incomesVM.localDateProperty());
+        table.setItems(incomesVM.getIncomes());
+        error.textProperty().bindBidirectional(incomesVM.errorProperty());
         table.getSelectionModel().selectFirst();
         System.out.println(table.getFocusModel().getFocusedItem());
-        error.textProperty().setValue("Showing expenses for "+ theMonth(expensesVM.getLocalDate().getMonthValue()) +" of "+ expensesVM.getLocalDate().getYear());
+        error.textProperty().setValue("Showing incomes for "+ theMonth(incomesVM.getLocalDate().getMonthValue()) +" of "+ incomesVM.getLocalDate().getYear());
 
     }
     public void back(MouseEvent mouseEvent){
@@ -61,12 +58,12 @@ public class ExpensesController extends ViewController {
     }
     public void add(MouseEvent mouseEvent){
         System.out.println("add");
-        viewHandler.setCenterView(Views.AddExpense.name());
+        viewHandler.setCenterView(Views.AddIncome.name());
     }
     public void delete(MouseEvent mouseEvent){
-        if (showAlert("Confirm Delete!", "Are you sure you want to delete your " + table.getFocusModel().getFocusedItem().getDescription() + " expense?")) {
-            expensesVM.delete(table.getFocusModel().getFocusedItem().getId());
-            table.setItems(expensesVM.getExpenses());
+        if (showAlert("Confirm Delete!", "Are you sure you want to delete your " + table.getFocusModel().getFocusedItem().getDescription() + " income?")) {
+            incomesVM.delete(table.getFocusModel().getFocusedItem().getId());
+            table.setItems(incomesVM.getIncomes());
         }
     }
     public boolean showAlert(String name, String heading){
@@ -78,8 +75,8 @@ public class ExpensesController extends ViewController {
     }
     public void updateTable(Event event){
         System.out.println("event");
-        error.textProperty().setValue("Showing expenses for "+ theMonth(expensesVM.getLocalDate().getMonthValue()) +" of "+ expensesVM.getLocalDate().getYear());
-        table.setItems(expensesVM.getExpenses());
+        error.textProperty().setValue("Showing incomes for "+ theMonth(incomesVM.getLocalDate().getMonthValue()) +" of "+ incomesVM.getLocalDate().getYear());
+        table.setItems(incomesVM.getIncomes());
     }
 
     public String theMonth(int month){
