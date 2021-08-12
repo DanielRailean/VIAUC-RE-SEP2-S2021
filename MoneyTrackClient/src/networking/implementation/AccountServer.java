@@ -21,6 +21,12 @@ public class AccountServer implements IAccountServer{
     }
 
     @Override
+    public boolean shareWith(int accountId, String shareWith) {
+
+        return accountServer.shareWith(accountId,shareWith);
+    }
+
+    @Override
     public boolean add(Account account) {
         return accountServer.add(account);
     }
@@ -33,11 +39,6 @@ public class AccountServer implements IAccountServer{
     @Override
     public List<Account> getAccounts(int userId) {
         return accountServer.getAccounts(userId);
-    }
-
-    @Override
-    public boolean shareWith(int accountId, String shareWith) {
-        return accountServer.shareWith(accountId,shareWith);
     }
 
     @Override

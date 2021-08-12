@@ -8,13 +8,32 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.RegisterController">
    <children>
-      <PasswordField fx:id="passwordField" layoutX="211.0" layoutY="219.0" promptText="password" />
-      <Label fx:id="errorLabel" layoutX="232.0" layoutY="132.0" text="Error" />
-      <Label fx:id="registerLabel" layoutX="466.0" layoutY="317.0" onMouseClicked="#onRegister" text="Register" textAlignment="CENTER">
+      <PasswordField fx:id="passwordField" layoutX="157.0" layoutY="212.0" promptText="password">
          <font>
-            <Font size="20.0" />
+            <Font name="Yu Gothic Light" size="25.0" />
+         </font></PasswordField>
+      <Label fx:id="errorLabel" layoutY="43.0" prefHeight="107.0" prefWidth="600.0" text="Error" textAlignment="CENTER">
+         <font>
+            <Font name="Yu Gothic Light" size="29.0" />
+         </font></Label>
+      <Label fx:id="registerLabel" layoutX="498.0" layoutY="364.0" onMouseClicked="#onRegister" text="Register" textAlignment="CENTER">
+         <font>
+            <Font name="Yu Gothic Light" size="29.0" />
          </font>
       </Label>
-      <TextField fx:id="emailField" layoutX="211.0" layoutY="175.0" promptText="email" />
+      <TextField fx:id="emailField" layoutX="157.0" layoutY="153.0" promptText="email">
+         <font>
+            <Font name="Yu Gothic Light" size="25.0" />
+         </font></TextField>
+      <Label layoutY="368.0" onMouseClicked="#back" text="Back">
+         <font>
+            <Font name="Yu Gothic Light" size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="113.0" text="Register to MoneyTrack">
+         <font>
+            <Font name="Yu Gothic Light" size="37.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

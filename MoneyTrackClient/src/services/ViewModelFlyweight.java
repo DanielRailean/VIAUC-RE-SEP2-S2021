@@ -29,24 +29,17 @@ public class ViewModelFlyweight {
     }
 
     public Register getRegister() {
-        if(register == null){
-            register = new Register(servicesFlyweight.getUserService());
-        }
-        return register;
+        return new Register(servicesFlyweight.getUserService());
+
     }
 
     public Login getLogin() {
-        if(login == null){
-            login = new Login(servicesFlyweight.getUserService(),servicesFlyweight.getAdminService());
-        }
-        return login;
+        return new Login(servicesFlyweight.getUserService(),servicesFlyweight.getAdminService());
     }
 
     public AddCurrency getAddCurrency() {
-        if(addCurrency == null){
-            addCurrency = new AddCurrency(servicesFlyweight.getCurrencyService());
-        }
-        return addCurrency;
+        return new AddCurrency(servicesFlyweight.getCurrencyService());
+
     }
     public Currencies getCurrencies() {
         if(currencies == null){
@@ -61,10 +54,8 @@ public class ViewModelFlyweight {
     }
 
     public AddCategory getAddCategory() {
-        if(addCategory == null){
-            addCategory = new AddCategory(servicesFlyweight.getCategoryService());
-        }
-        return addCategory;
+        return new AddCategory(servicesFlyweight.getCategoryService());
+
     }
     public Categories getCategories() {
         if(categories == null){
@@ -90,8 +81,8 @@ public class ViewModelFlyweight {
     }
 
     public AddAccount getAddAccount(){
-        if(addAccount == null) addAccount = new AddAccount(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService());
-        return addAccount;
+        return new AddAccount(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService());
+
     }
 
     public UpdateAccount getUpdateAccount(){
@@ -127,10 +118,8 @@ public class ViewModelFlyweight {
         return budgets;
     }
     public AddBudget getAddBudget(){
-        if (addBudget == null) {
-            addBudget = new AddBudget(servicesFlyweight.getCurrencyService(),servicesFlyweight.getCategoryService(),servicesFlyweight.getBudgetService());
-        }
-        return addBudget;
+        return new AddBudget(servicesFlyweight.getCurrencyService(),servicesFlyweight.getCategoryService(),servicesFlyweight.getBudgetService());
+
     }
 
     public Expenses getExpenses(){
@@ -141,10 +130,7 @@ public class ViewModelFlyweight {
     }
 
     public AddExpense getAddExpense(){
-        if (addExpense == null) {
-            addExpense = new AddExpense(servicesFlyweight.getCurrencyService(),servicesFlyweight.getBudgetService(),servicesFlyweight.getAccountService(),servicesFlyweight.getExpenseService());
-        }
-        return addExpense;
+        return new AddExpense(servicesFlyweight.getCurrencyService(),servicesFlyweight.getBudgetService(),servicesFlyweight.getAccountService(),servicesFlyweight.getExpenseService());
     }
     public Incomes getIncomes(){
         if (incomes == null) {
@@ -154,9 +140,7 @@ public class ViewModelFlyweight {
     }
 
     public AddIncome getAddIncome(){
-        if (addIncome == null) {
-            addIncome = new AddIncome(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService(),servicesFlyweight.getIncomeService());
-        }
-        return addIncome;
+        return new AddIncome(servicesFlyweight.getCurrencyService(),servicesFlyweight.getAccountService(),servicesFlyweight.getIncomeService());
+
     }
 }

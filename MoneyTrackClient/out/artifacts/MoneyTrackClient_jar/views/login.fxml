@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.LoginController">
+   <children>
+      <PasswordField fx:id="passwordField" layoutX="157.0" layoutY="219.0" promptText="password">
+         <font>
+            <Font name="Yu Gothic Light" size="25.0" />
+         </font></PasswordField>
+      <Label fx:id="errorLabel" layoutX="4.0" layoutY="32.0" prefHeight="124.0" prefWidth="592.0" text="Error" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Yu Gothic Light" size="27.0" />
+         </font></Label>
+      <Label fx:id="registerLabel" layoutX="529.0" layoutY="364.0" onMouseClicked="#login" text="Login" textAlignment="CENTER">
+         <font>
+            <Font name="Yu Gothic Light" size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailField" layoutX="157.0" layoutY="159.0" promptText="email">
+         <font>
+            <Font name="Yu Gothic Light" size="25.0" />
+         </font></TextField>
+      <Label layoutY="364.0" onMouseClicked="#back" text="Back">
+         <font>
+            <Font name="Yu Gothic Light" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutY="-4.0" text="Login page">
+         <font>
+            <Font name="Yu Gothic Light" size="29.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

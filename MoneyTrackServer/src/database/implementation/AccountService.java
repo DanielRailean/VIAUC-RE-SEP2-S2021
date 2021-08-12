@@ -20,6 +20,24 @@ public class AccountService implements IAccountService {
     }
 
     @Override
+    public boolean shareWith(int accountId, int shareWith) {
+        try (Connection connection = DBAccess.getInstance().getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement("update accounts set sharedWith = ? where id =?"))
+        {
+
+            preparedStatement.setInt(1, shareWith);
+            preparedStatement.setInt(2, accountId);
+
+            return preparedStatement.executeUpdate() > 0;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
     public boolean add(Account account) {
         if(!accountNotExists(account)) return false;
         System.out.println("Trying to add "+account);
@@ -121,23 +139,6 @@ public class AccountService implements IAccountService {
             e.printStackTrace();
             return false;
         }
-    }
-
-    @Override
-    public boolean shareWith(int accountId, int shareWith) {
-        try (Connection connection = DBAccess.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("update accounts set sharedWith = ? where id =?"))
-        {
-
-            preparedStatement.setInt(1, shareWith);
-            preparedStatement.setInt(2, accountId);
-
-            return preparedStatement.executeUpdate() > 0;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
 

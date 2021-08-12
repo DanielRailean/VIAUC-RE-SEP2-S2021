@@ -30,7 +30,6 @@ public class ShareAccount {
     }
 
     public void shareAccount(){
-
         error.setValue(accountService.shareWith(account.getId(),shareWith.getValue()));
     }
 

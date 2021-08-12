@@ -30,8 +30,8 @@ public class ViewHandler {
         stage.setMinHeight(700);
         OpenView(Views.Main.name());
         setCenterView(Views.Start.name());
-        setBottomView(Views.BottomBar.name());
-        SessionStorage.setCurrentUser(new User("dd@dd.com","ddddd",1));
+//        setBottomView(Views.BottomBar.name());
+//        SessionStorage.setCurrentUser(new User("dd@dd.com","ddddd",1));
     }
 
     public void OpenView(String viewName) {
