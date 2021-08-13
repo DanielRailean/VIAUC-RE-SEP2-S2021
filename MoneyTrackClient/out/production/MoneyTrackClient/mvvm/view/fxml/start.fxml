@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvvm.view.controllers.StartupController">
+   <children>
+      <Label layoutX="293.0" layoutY="303.0" onMouseClicked="#redirectRegister" text="SignUp" textAlignment="CENTER" textFill="#a251f3">
+         <font>
+            <Font name="Yu Gothic Light" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="306.0" layoutY="237.0" onMouseClicked="#redirectLogin" text="Login" textAlignment="CENTER" textFill="#a251f3">
+         <font>
+            <Font name="Yu Gothic Light" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="274.0" layoutY="94.0" prefHeight="36.0" prefWidth="361.0" text="Welcome to MoneyTrack" textFill="#a251f3">
+         <font>
+            <Font name="Yu Gothic Medium" size="31.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="146.0" fitWidth="145.0" layoutX="59.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../favicon_io/android-chrome-192x192.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
